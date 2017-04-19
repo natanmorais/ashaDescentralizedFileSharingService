@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RetalhoFileSharing.iml" filepath="$PROJECT_DIR$/.idea/modules/RetalhoFileSharing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RetalhoFileSharing_main.iml" filepath="$PROJECT_DIR$/.idea/modules/RetalhoFileSharing_main.iml" group="RetalhoFileSharing" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RetalhoFileSharing_test.iml" filepath="$PROJECT_DIR$/.idea/modules/RetalhoFileSharing_test.iml" group="RetalhoFileSharing" />
+    </modules>
+  </component>
+</project>
