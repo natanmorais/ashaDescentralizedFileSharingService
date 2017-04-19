@@ -14,6 +14,8 @@ import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import br.asha.retalho.utils.Utils;
+
 /**
  * @author fir3destr0yer
  */
@@ -23,7 +25,8 @@ public class Server
     {
         try
         {
-            ServerSocket ss = new ServerSocket(15123, 50, Inet4Address.getByName("200.235.88.221"));
+            String ip = Utils.getGlobalIp();
+            ServerSocket ss = new ServerSocket(15123, 50, Inet4Address.getByName(ip));
             Socket s = ss.accept();
             System.out.println("accept" + s);
             OutputStream os = s.getOutputStream();
