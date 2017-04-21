@@ -26,6 +26,7 @@ public class DfssServer
     protected SubNetMachinesProvider mMachineList;
     protected SharedFilesProvider mSharedFileList;
     protected String mName;
+    protected String mIp;
     private OnFileListener mFileListener;
 
     /**
@@ -44,6 +45,7 @@ public class DfssServer
             throws IOException, InstantiationException, IllegalAccessException
     {
         mName = name;
+        mIp = ip;
         mFileServer = new RmiServer(new FileImpl(), ip, "FILE");
         mNodeServer = new RmiServer(new NodeImpl(), ip, "NODE");
         mSuperNodeList = new SuperNodesProvider();
@@ -178,6 +180,54 @@ public class DfssServer
                 throws RemoteException
         {
             return true;
+        }
+
+        @Override
+        public boolean startNewSuperNode(SuperNodesProvider.SuperNodeList nodeList, String name)
+                throws RemoteException
+        {
+            for(SuperNodesProvider.SuperNode sn : nodeList)
+            {
+                if(sn.subnetName.equalsIgnoreCase(name))
+                {
+                    sn.ip = mIp;
+                }
+            }
+
+            mSuperNodeList.updateList(nodeList);
+
+            for(SuperNodesProvider.SuperNode sn : nodeList)
+            {
+                if(sn.ip.equalsIgnoreCase(mIp)) continue;
+
+                try
+                {
+                    RmiClient<INode> nodeClient = new RmiClient<>(sn.ip, "NODE");
+                    nodeClient.getRemoteObj().requestRemoveSubNet(name);
+                    nodeClient.getRemoteObj().requestNewSubNet(mIp, name);
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+
+            return true;
+        }
+
+        @Override
+        public boolean updateNewSuperNode(SubNetMachinesProvider.MachineList machineList, SharedFilesProvider.SharedFileList sharedFileList)
+                throws RemoteException
+        {
+            mSharedFileList.updateList(sharedFileList);
+            mMachineList.updateList(machineList);
+            return true;
+        }
+
+        @Override
+        public String getYourName()
+        {
+            return mName;
         }
     }
 

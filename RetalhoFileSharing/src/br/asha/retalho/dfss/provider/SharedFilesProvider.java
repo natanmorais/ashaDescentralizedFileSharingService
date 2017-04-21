@@ -75,6 +75,12 @@ public class SharedFilesProvider
         return mList;
     }
 
+    public void updateList(SharedFileList list)
+    {
+        mList = list;
+        save();
+    }
+
     public static class SharedFile implements Serializable
     {
         public String id;

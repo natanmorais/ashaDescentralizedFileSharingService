@@ -87,6 +87,12 @@ public class SuperNodesProvider
         return mList;
     }
 
+    public void updateList(SuperNodeList list)
+    {
+        mList = list;
+        save();
+    }
+
     public static class SuperNode implements Serializable
     {
         public String ip;

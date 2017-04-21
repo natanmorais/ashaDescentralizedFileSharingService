@@ -70,6 +70,17 @@ public class SubNetMachinesProvider
         }
     }
 
+    public MachineList toList()
+    {
+        return mList;
+    }
+
+    public void updateList(MachineList list)
+    {
+        mList = list;
+        save();
+    }
+
     public static class Machine implements Serializable
     {
         public String ip;

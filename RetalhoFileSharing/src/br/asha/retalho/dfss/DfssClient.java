@@ -3,6 +3,7 @@ package br.asha.retalho.dfss;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -10,6 +11,7 @@ import java.rmi.RemoteException;
 
 import br.asha.retalho.dfss.helpers.FileHelper;
 import br.asha.retalho.dfss.provider.SharedFilesProvider;
+import br.asha.retalho.dfss.provider.SubNetMachinesProvider;
 import br.asha.retalho.dfss.provider.SuperNodesProvider;
 import br.asha.retalho.dfss.provider.TransferFileProvider;
 import br.asha.retalho.dfss.rmi.RmiClient;
@@ -20,13 +22,33 @@ public class DfssClient
     private String mFirstSuperNodeIp;
     private String myIp;
     private SuperNodesProvider.SuperNodeList mSuperNodeList;
+    private SubNetMachinesProvider mMachineList;
+    private SharedFilesProvider mSharedFileList;
     private String myName;
+    private String mSuperNodeName, mSuperNodeIp;
 
     public DfssClient(String pMyName, String firstSuperNodeIp)
+            throws IOException
     {
         mFirstSuperNodeIp = firstSuperNodeIp;
         myIp = Utils.ipify();
         myName = pMyName;
+        mMachineList = new SubNetMachinesProvider();
+        mSharedFileList = new SharedFilesProvider();
+
+        try
+        {
+            InputStream is = new FileInputStream("mysupernode.asha");
+            byte[] data = new byte[128];
+            int length = is.read(data);
+            String tudo = new String(data, 0, length);
+            mSuperNodeIp = tudo.split("\\+")[0];
+            mSuperNodeName = tudo.split("\\+")[1];
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -137,6 +159,32 @@ public class DfssClient
     {
         RmiClient<INode> nodeClient = new RmiClient<>(mFirstSuperNodeIp, "NODE");
         return nodeClient.getRemoteObj().requestAvailableSuperNodes();
+    }
+
+    public void atribuirNovoSuperNo()
+    {
+        for(SubNetMachinesProvider.Machine m : mMachineList.toList())
+        {
+            try
+            {
+                RmiClient<INode> nodeClient = new RmiClient<>(m.ip, "NODE");
+                if(!nodeClient.getRemoteObj().startNewSuperNode(mSuperNodeList, mSuperNodeName))
+                {
+                    continue;
+                }
+
+                if(!nodeClient.getRemoteObj().updateNewSuperNode(mMachineList.toList(), mSharedFileList.toList()))
+                {
+                    continue;
+                }
+
+                return;
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void requestFile(String ip, String name)

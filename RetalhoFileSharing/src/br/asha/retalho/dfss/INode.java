@@ -5,6 +5,8 @@ import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+import br.asha.retalho.dfss.provider.SharedFilesProvider;
+import br.asha.retalho.dfss.provider.SubNetMachinesProvider;
 import br.asha.retalho.dfss.provider.SuperNodesProvider;
 
 public interface INode extends Remote
@@ -44,4 +46,13 @@ public interface INode extends Remote
 
     boolean areYouUp()
             throws RemoteException;
+
+    boolean startNewSuperNode(SuperNodesProvider.SuperNodeList nodeList, String name)
+            throws RemoteException;
+
+    boolean updateNewSuperNode(SubNetMachinesProvider.MachineList machineList,
+                               SharedFilesProvider.SharedFileList sharedFileList)
+            throws RemoteException;
+
+    String getYourName();
 }
