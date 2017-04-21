@@ -12,6 +12,7 @@ import br.asha.retalho.dfss.provider.SharedFilesProvider;
 import br.asha.retalho.dfss.provider.SuperNodesProvider;
 import br.asha.retalho.dfss.rmi.RmiClient;
 import br.asha.retalho.dfss.utils.Utils;
+import java.io.FileInputStream;
 
 public class DfssClient
 {
@@ -60,12 +61,50 @@ public class DfssClient
             throws NotBoundException, IOException
     {
         RmiClient<INode> nodeClient = new RmiClient<>(subNetIp, "NODE");
-        if(nodeClient.getRemoteObj().requestNewMachine(myIp, myName) == 0)
+        String nomeSubRede = nodeClient.getRemoteObj().requestNewMachine(myIp, myName); 
+        if(nomeSubRede != null)
         {
             OutputStream os = new FileOutputStream("mysupernode.asha");
             os.write(subNetIp.getBytes());
+            os.write("+".getBytes());
+            os.write(nomeSubRede.getBytes());
             os.close();
         }
+    }
+    
+    public void religamentoSistema() {
+        try {
+            FileInputStream is = new FileInputStream("mysupernode.asha");
+            byte[] data = new byte[128];
+            int length = is.read(data);
+            String file = new String(data, 0, length);
+            String ip = file.split("\\+")[0];
+            String name = file.split("\\+")[1];
+            is.close();
+            
+            try {
+                RmiClient<INode> nodeClient = new RmiClient<>(ip, "NODE");
+                nodeClient.getRemoteObj().areYouUp();
+                return;
+            }catch(Exception e){
+                //Ler IP de algum computador que fez transferência em um LOG
+                String ipPC = "200.235.88.221";
+                RmiClient<INode> nodeClient = new RmiClient<>(ipPC, "NODE");
+                String superNode = nodeClient.getRemoteObj().whichIsYourSuperNode();
+                nodeClient = new RmiClient<>(superNode, "NODE");
+                SuperNodesProvider.SuperNode sn = nodeClient.getRemoteObj().verifySuperNodeDown(ip, name);
+                if(sn==null){
+                    //Desligamento Abrupto.
+                } else {
+                    nodeClient = new RmiClient<>(sn.ip, "NODE");
+                    nodeClient.getRemoteObj().requestNewMachine(myIp, myName);
+                }
+            }
+            
+        } catch (Exception ex) {
+            //deu ruim
+        }
+        
     }
 
     public void novoArquivo(String subNetIp, String id, String desc, String name)
