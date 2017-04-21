@@ -30,7 +30,7 @@ public interface INode extends Remote
      * @param ip   O ip da máquina que deseja entrar na sub-rede.
      * @param name O nome da máquina.
      */
-    int requestNewMachine(String ip, String name)
+    String requestNewMachine(String ip, String name)
             throws RemoteException;
 
     boolean requestRemoveSubNet(String name)

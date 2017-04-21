@@ -93,7 +93,7 @@ public class DfssServer
         }
 
         @Override
-        public int requestNewMachine(String ip, String name)
+        public String requestNewMachine(String ip, String name)
                 throws RemoteException
         {
             System.out.println(String.format("requestNewMachine ip:%s name: %s", ip, name));
@@ -101,7 +101,7 @@ public class DfssServer
             m.ip = ip;
             m.name = name;
             mMachineList.add(m);
-            return 0;
+            return mName;
         }
 
         @Override
