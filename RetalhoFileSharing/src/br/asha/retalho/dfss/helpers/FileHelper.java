@@ -36,11 +36,11 @@ public class FileHelper
         }
     }
 
-    public static byte[] requestFileFrom(String ip, String name)
+    public static byte[] requestFileFrom(String ipServer, String ipClient, String name)
             throws RemoteException, NotBoundException, MalformedURLException
     {
         //Enviar o arquivo.
-        RmiClient<IFile> mFile = new RmiClient<>(ip, "FILE");
-        return mFile.getRemoteObj().requestFile(name);
+        RmiClient<IFile> mFile = new RmiClient<>(ipServer, "FILE");
+        return mFile.getRemoteObj().requestFile(ipClient, name);
     }
 }

@@ -13,6 +13,7 @@ import java.rmi.server.UnicastRemoteObject;
 import br.asha.retalho.dfss.provider.SharedFilesProvider;
 import br.asha.retalho.dfss.provider.SubNetMachinesProvider;
 import br.asha.retalho.dfss.provider.SuperNodesProvider;
+import br.asha.retalho.dfss.provider.TransferFileProvider;
 import br.asha.retalho.dfss.rmi.RmiClient;
 import br.asha.retalho.dfss.rmi.RmiServer;
 import br.asha.retalho.dfss.utils.Utils;
@@ -218,7 +219,7 @@ public class DfssServer
          * @return conteúdo do arquivo.
          */
         @Override
-        public byte[] requestFile(String name)
+        public byte[] requestFile(String ip, String name)
                 throws RemoteException
         {
             System.out.printf("Requisição do arquivo %s\n", name);
@@ -247,6 +248,9 @@ public class DfssServer
                     {
                         mFileListener.onFileRequested(data);
                     }
+
+                    TransferFileProvider.getInstance().add(ip, name);
+
                     return data;
                 }
                 catch(Exception e)

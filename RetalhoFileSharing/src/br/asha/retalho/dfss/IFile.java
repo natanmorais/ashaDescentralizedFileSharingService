@@ -23,7 +23,7 @@ public interface IFile extends Remote
      * @param name nome do arquivo.
      * @return conteúdo do arquivo.
      */
-    byte[] requestFile(String name)
+    byte[] requestFile(String ip, String name)
             throws RemoteException;
 
     /**
