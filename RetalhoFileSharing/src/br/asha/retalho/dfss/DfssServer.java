@@ -4,23 +4,34 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import br.asha.retalho.dfss.provider.SharedFilesProvider;
+import br.asha.retalho.dfss.provider.SubNetMachinesProvider;
+import br.asha.retalho.dfss.provider.SuperNodesProvider;
+import br.asha.retalho.dfss.rmi.RmiClient;
 import br.asha.retalho.dfss.rmi.RmiServer;
 import br.asha.retalho.dfss.utils.Utils;
 
 public class DfssServer
 {
-    private final RmiServer mServer;
+    private final RmiServer mFileServer;
+    private final RmiServer mNodeServer;
+    private OnFileListener mFileListener;
+
+    private SuperNodesProvider mSuperNodeList;
+    private SubNetMachinesProvider mMachineList;
+    private SharedFilesProvider mSharedFileList;
 
     /**
      * Cria o servidor com o ip global.
      */
     public DfssServer()
-            throws InstantiationException, IllegalAccessException, RemoteException
+            throws InstantiationException, IllegalAccessException, IOException
     {
         this(Utils.ipify());
     }
@@ -29,15 +40,62 @@ public class DfssServer
      * Cria o servidor com um ip especifico.
      */
     public DfssServer(String ip)
-            throws RemoteException, InstantiationException, IllegalAccessException
+            throws IOException, InstantiationException, IllegalAccessException
     {
-        mServer = new RmiServer(new FileImpl(), ip, "FILE");
+        mFileServer = new RmiServer(new FileImpl(), ip, "FILE");
+        mNodeServer = new RmiServer(new NodeImpl(), ip, "NODE");
+        mSuperNodeList = new SuperNodesProvider();
+        mMachineList = new SubNetMachinesProvider();
+        mSharedFileList = new SharedFilesProvider();
+    }
+
+    public interface OnFileListener
+    {
+        void onFileRequested(byte[] data);
+    }
+
+    private class NodeImpl extends UnicastRemoteObject implements INode
+    {
+
+        protected NodeImpl()
+                throws RemoteException
+        {
+        }
+
+        @Override
+        public SuperNodesProvider.SuperNodeList requestNewSubNet(String ip, String subNetName)
+                throws RemoteException
+        {
+            SuperNodesProvider.SuperNode sn = new SuperNodesProvider.SuperNode();
+            sn.ip = ip;
+            sn.subnetName = subNetName;
+            mSuperNodeList.add(sn);
+            return mSuperNodeList.toList();
+        }
+
+        @Override
+        public SuperNodesProvider.SuperNodeList requestAvailableSuperNodes()
+                throws RemoteException
+        {
+            return mSuperNodeList.toList();
+        }
+
+        @Override
+        public int requestNewMachine(String ip, String name)
+                throws RemoteException
+        {
+            SubNetMachinesProvider.Machine m = new SubNetMachinesProvider.Machine();
+            m.ip = ip;
+            m.name = name;
+            mMachineList.add(m);
+            return 0;
+        }
     }
 
     /**
      * Implementa as requisicoes relacionadas aos arquivos.
      */
-    private static class FileImpl extends UnicastRemoteObject implements IFile
+    private class FileImpl extends UnicastRemoteObject implements IFile
     {
 
         protected FileImpl()
@@ -96,7 +154,12 @@ public class DfssServer
 
                     //Retorna todo o conteúdo do arquivo.
                     System.out.printf("O arquivo %s tem %d bytes\n", name, baos.size());
-                    return baos.toByteArray();
+                    byte[] data = baos.toByteArray();
+                    if(mFileListener != null)
+                    {
+                        mFileListener.onFileRequested(data);
+                    }
+                    return data;
                 }
                 catch(Exception e)
                 {
@@ -108,6 +171,43 @@ public class DfssServer
             {
                 return null;
             }
+        }
+
+        @Override
+        public int updateSharedFileList(String id, String ip, String desc, String name, boolean firstReceptor)
+                throws RemoteException
+        {
+            SharedFilesProvider.SharedFile sf = new SharedFilesProvider.SharedFile();
+            sf.id = id;
+            sf.ip = ip;
+            sf.desc = desc;
+            sf.name = name;
+            mSharedFileList.add(sf);
+
+            if(firstReceptor)
+            {
+                for(SuperNodesProvider.SuperNode sn : mSuperNodeList.toList())
+                {
+                    try
+                    {
+                        RmiClient<IFile> fileClient = new RmiClient<>(sn.ip, "FILE");
+                        fileClient.getRemoteObj().updateSharedFileList(id, ip, desc, name, false);
+                    }
+                    catch(Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            return 0;
+        }
+
+        @Override
+        public SharedFilesProvider.SharedFileList getSharedFileList()
+                throws RemoteException
+        {
+            return mSharedFileList.toList();
         }
     }
 }

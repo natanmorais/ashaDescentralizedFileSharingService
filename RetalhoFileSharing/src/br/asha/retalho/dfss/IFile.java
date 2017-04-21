@@ -3,6 +3,8 @@ package br.asha.retalho.dfss;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+import br.asha.retalho.dfss.provider.SharedFilesProvider;
+
 public interface IFile extends Remote
 {
     /**
@@ -22,5 +24,24 @@ public interface IFile extends Remote
      * @return conteúdo do arquivo.
      */
     byte[] requestFile(String name)
+            throws RemoteException;
+
+    /**
+     * Uma máquina adicionou um novo arquivo para o compartilhamente.
+     *
+     * @param id   O ID único do arquivo.
+     * @param ip   O IP máquina que possui o arquivo.
+     * @param desc Descrição do arquivo.
+     * @param name O nome do arquivo.
+     */
+    int updateSharedFileList(String id, String ip, String desc, String name, boolean firstReceptor)
+            throws RemoteException;
+
+    /**
+     *
+     * @return
+     * @throws RemoteException
+     */
+    SharedFilesProvider.SharedFileList getSharedFileList()
             throws RemoteException;
 }
