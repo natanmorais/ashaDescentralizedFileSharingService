@@ -32,19 +32,27 @@ public class DfssClient
      * @throws NotBoundException
      * @throws MalformedURLException
      */
-    public void criarUmNovaSubRede(String name)
+    public boolean criarUmNovaSubRede(String name)
             throws RemoteException, NotBoundException, MalformedURLException
     {
         RmiClient<INode> nodeClient = new RmiClient<>(mFirstSuperNodeIp, "NODE");
         mSuperNodeList = nodeClient.getRemoteObj().requestNewSubNet(myIp, name);
 
+        if(mSuperNodeList == null)
+        {
+            return false;
+        }
+
         for(SuperNodesProvider.SuperNode node : mSuperNodeList)
         {
-            if(!myIp.equals(node.ip)){
+            if(!myIp.equals(node.ip))
+            {
                 nodeClient = new RmiClient<>(node.ip, "NODE");
                 nodeClient.getRemoteObj().requestNewSubNet(myIp, name);
             }
         }
+
+        return true;
     }
 
     public void entrarSubRede(String subNetIp)

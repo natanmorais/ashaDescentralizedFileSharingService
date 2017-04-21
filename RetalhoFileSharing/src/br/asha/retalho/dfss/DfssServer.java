@@ -21,12 +21,11 @@ public class DfssServer
 {
     private final RmiServer mFileServer;
     private final RmiServer mNodeServer;
-    private OnFileListener mFileListener;
-
     protected SuperNodesProvider mSuperNodeList;
     protected SubNetMachinesProvider mMachineList;
     protected SharedFilesProvider mSharedFileList;
     protected String mName;
+    private OnFileListener mFileListener;
 
     /**
      * Cria o servidor com o ip global.
@@ -69,6 +68,15 @@ public class DfssServer
                 throws RemoteException
         {
             System.out.println(String.format("requestNewSubNet ip:%s subNetName: %s", ip, subNetName));
+
+            for(SuperNodesProvider.SuperNode sn : mSuperNodeList.toList())
+            {
+                if(sn.subnetName.equalsIgnoreCase(subNetName))
+                {
+                    return null;
+                }
+            }
+
             SuperNodesProvider.SuperNode sn = new SuperNodesProvider.SuperNode();
             sn.ip = ip;
             sn.subnetName = subNetName;

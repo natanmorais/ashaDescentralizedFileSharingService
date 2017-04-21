@@ -79,19 +79,6 @@ public class SuperNodesProvider
     {
         public String ip;
         public String subnetName;
-
-        @Override
-        public int hashCode()
-        {
-            return ip.hashCode();
-        }
-
-        @Override
-        public boolean equals(Object o)
-        {
-            return o instanceof String &&
-                    o.equals(ip);
-        }
     }
 
     public static class SuperNodeList extends ArrayList<SuperNode>
