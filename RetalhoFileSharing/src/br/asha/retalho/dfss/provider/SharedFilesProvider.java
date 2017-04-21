@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class SharedFilesProvider
@@ -46,7 +47,7 @@ public class SharedFilesProvider
         return mList;
     }
 
-    public static class SharedFile
+    public static class SharedFile implements Serializable
     {
         public String id;
         public String ip;

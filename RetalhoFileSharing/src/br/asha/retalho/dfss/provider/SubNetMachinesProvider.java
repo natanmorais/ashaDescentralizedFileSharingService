@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class SubNetMachinesProvider
@@ -41,7 +42,7 @@ public class SubNetMachinesProvider
         mList.clear();
     }
 
-    public static class Machine
+    public static class Machine implements Serializable
     {
         public String ip;
         public String name;
