@@ -16,6 +16,8 @@ public class RmiServer
 {
     private static final int PORT = 1098;
 
+    private static Registry mRegistry = null;
+
     /**
      * Cria uma instância da classe Server.
      *
@@ -33,9 +35,13 @@ public class RmiServer
     {
         try
         {
+            if(mRegistry == null)
+            {
+                mRegistry = LocateRegistry.createRegistry(PORT);
+            }
+
             RemoteServer.setLog(System.out);
             //Cria um registro que aceita pedidos pela porta especificada.
-            Registry registry = LocateRegistry.createRegistry(PORT);
             //Caminho com o ip, porta e nome.
             String uri = "rmi://" + ip + ":" + PORT + "/" + name;
             System.out.println(uri);

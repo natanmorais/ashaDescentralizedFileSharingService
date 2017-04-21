@@ -66,6 +66,7 @@ public class DfssServer
         public SuperNodesProvider.SuperNodeList requestNewSubNet(String ip, String subNetName)
                 throws RemoteException
         {
+            System.out.println(String.format("requestNewSubNet ip:%s subNetName: %s", ip, subNetName));
             SuperNodesProvider.SuperNode sn = new SuperNodesProvider.SuperNode();
             sn.ip = ip;
             sn.subnetName = subNetName;
@@ -77,6 +78,7 @@ public class DfssServer
         public SuperNodesProvider.SuperNodeList requestAvailableSuperNodes()
                 throws RemoteException
         {
+            System.out.println(String.format("requestAvailableSuperNodes"));
             return mSuperNodeList.toList();
         }
 
@@ -84,6 +86,7 @@ public class DfssServer
         public int requestNewMachine(String ip, String name)
                 throws RemoteException
         {
+            System.out.println(String.format("requestNewMachine ip:%s name: %s", ip, name));
             SubNetMachinesProvider.Machine m = new SubNetMachinesProvider.Machine();
             m.ip = ip;
             m.name = name;
@@ -177,6 +180,8 @@ public class DfssServer
         public int updateSharedFileList(String id, String ip, String desc, String name, boolean firstReceptor)
                 throws RemoteException
         {
+            System.out.println(String.format("updateSharedFileList id:%s ip:%s desc:%s name: %s", id, ip, desc, name));
+
             SharedFilesProvider.SharedFile sf = new SharedFilesProvider.SharedFile();
             sf.id = id;
             sf.ip = ip;
@@ -207,6 +212,7 @@ public class DfssServer
         public SharedFilesProvider.SharedFileList getSharedFileList()
                 throws RemoteException
         {
+            System.out.println(String.format("getSharedFileList"));
             return mSharedFileList.toList();
         }
     }
