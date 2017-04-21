@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.security.MessageDigest;
+import java.util.concurrent.TimeUnit;
 
 public class Utils
 {
@@ -22,6 +23,9 @@ public class Utils
     public static String ipify()
     {
         OkHttpClient client = new OkHttpClient();
+        client.setConnectTimeout(5, TimeUnit.SECONDS);
+        client.setReadTimeout(5, TimeUnit.SECONDS);
+        client.setWriteTimeout(5, TimeUnit.SECONDS);
 
         Request request = new Request.Builder()
                 .url(IPIFY_URL)

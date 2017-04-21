@@ -23,25 +23,27 @@ public class DfssServer
     private final RmiServer mNodeServer;
     private OnFileListener mFileListener;
 
-    private SuperNodesProvider mSuperNodeList;
-    private SubNetMachinesProvider mMachineList;
-    private SharedFilesProvider mSharedFileList;
+    protected SuperNodesProvider mSuperNodeList;
+    protected SubNetMachinesProvider mMachineList;
+    protected SharedFilesProvider mSharedFileList;
+    protected String mName;
 
     /**
      * Cria o servidor com o ip global.
      */
-    public DfssServer()
+    public DfssServer(String name)
             throws InstantiationException, IllegalAccessException, IOException
     {
-        this(Utils.ipify());
+        this(name, Utils.ipify());
     }
 
     /**
      * Cria o servidor com um ip especifico.
      */
-    public DfssServer(String ip)
+    public DfssServer(String name, String ip)
             throws IOException, InstantiationException, IllegalAccessException
     {
+        mName = name;
         mFileServer = new RmiServer(new FileImpl(), ip, "FILE");
         mNodeServer = new RmiServer(new NodeImpl(), ip, "NODE");
         mSuperNodeList = new SuperNodesProvider();
