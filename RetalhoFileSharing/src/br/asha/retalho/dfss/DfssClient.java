@@ -19,10 +19,11 @@ public class DfssClient
     private SuperNodesProvider.SuperNodeList mSuperNodeList;
     private String myName;
 
-    public DfssClient(String myName, String firstSuperNodeIp)
+    public DfssClient(String pMyName, String firstSuperNodeIp)
     {
         mFirstSuperNodeIp = firstSuperNodeIp;
         myIp = Utils.ipify();
+        myName = pMyName;
     }
 
     /**
@@ -39,8 +40,10 @@ public class DfssClient
 
         for(SuperNodesProvider.SuperNode node : mSuperNodeList)
         {
-            nodeClient = new RmiClient<>(node.ip, "NODE");
-            nodeClient.getRemoteObj().requestNewSubNet(myIp, name);
+            if(!myIp.equals(node.ip)){
+                nodeClient = new RmiClient<>(node.ip, "NODE");
+                nodeClient.getRemoteObj().requestNewSubNet(myIp, name);
+            }
         }
     }
 
