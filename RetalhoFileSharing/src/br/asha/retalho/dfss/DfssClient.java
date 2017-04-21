@@ -7,11 +7,11 @@ import br.asha.retalho.dfss.helpers.FileHelper;
 
 public class DfssClient
 {
-    public void requestFile(String name)
+    public void requestFile(String ip, String name)
     {
         try
         {
-            byte[] data = FileHelper.requestFileFrom("192.168.0.3", name);
+            byte[] data = FileHelper.requestFileFrom(ip, name);
             if(data != null && data.length > 0)
             {
                 try(OutputStream os = new FileOutputStream(name))
