@@ -11,6 +11,8 @@ import br.asha.retalho.dfss.provider.SharedFilesProvider;
 import br.asha.retalho.dfss.provider.SuperNodesProvider;
 import br.asha.retalho.dfss.rmi.RmiClient;
 import br.asha.retalho.dfss.utils.Utils;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class DfssClient
 {
@@ -56,10 +58,14 @@ public class DfssClient
     }
 
     public void entrarSubRede(String subNetIp)
-            throws RemoteException, NotBoundException, MalformedURLException
+            throws RemoteException, NotBoundException, MalformedURLException, FileNotFoundException, IOException
     {
         RmiClient<INode> nodeClient = new RmiClient<>(subNetIp, "NODE");
-        nodeClient.getRemoteObj().requestNewMachine(myIp, myName);
+        if(nodeClient.getRemoteObj().requestNewMachine(myIp, myName) == 0){
+            OutputStream os = new FileOutputStream("mysupernode.asha");
+            os.write(subNetIp.getBytes());
+            os.close();
+        }
     }
 
     public void novoArquivo(String subNetIp, String id, String desc, String name)
