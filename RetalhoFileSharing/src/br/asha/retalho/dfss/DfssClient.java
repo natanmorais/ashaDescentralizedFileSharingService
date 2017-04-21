@@ -1,6 +1,7 @@
 package br.asha.retalho.dfss;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -11,8 +12,6 @@ import br.asha.retalho.dfss.provider.SharedFilesProvider;
 import br.asha.retalho.dfss.provider.SuperNodesProvider;
 import br.asha.retalho.dfss.rmi.RmiClient;
 import br.asha.retalho.dfss.utils.Utils;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 public class DfssClient
 {
@@ -58,10 +57,11 @@ public class DfssClient
     }
 
     public void entrarSubRede(String subNetIp)
-            throws RemoteException, NotBoundException, MalformedURLException, FileNotFoundException, IOException
+            throws NotBoundException, IOException
     {
         RmiClient<INode> nodeClient = new RmiClient<>(subNetIp, "NODE");
-        if(nodeClient.getRemoteObj().requestNewMachine(myIp, myName) == 0){
+        if(nodeClient.getRemoteObj().requestNewMachine(myIp, myName) == 0)
+        {
             OutputStream os = new FileOutputStream("mysupernode.asha");
             os.write(subNetIp.getBytes());
             os.close();

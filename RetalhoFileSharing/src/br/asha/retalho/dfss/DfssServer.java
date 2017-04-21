@@ -103,6 +103,81 @@ public class DfssServer
             mMachineList.add(m);
             return 0;
         }
+
+        @Override
+        public boolean requestRemoveSubNet(String name)
+                throws RemoteException
+        {
+            System.out.println(String.format("requestRemoveSubNet name: %s", name));
+            mSuperNodeList.removeByName(name);
+            return true;
+        }
+
+        @Override
+        public SuperNodesProvider.SuperNode verifySuperNodeDown(String ip, String name)
+                throws RemoteException
+        {
+            System.out.println(String.format("verifySuperNodeDown name: ip:%s %s", ip, name));
+
+            for(SuperNodesProvider.SuperNode sn : mSuperNodeList.toList())
+            {
+                if(sn.subnetName.equalsIgnoreCase(name))
+                {
+                    if(sn.ip.equals(ip))
+                    {
+                        mSuperNodeList.remove(sn);
+
+                        for(SuperNodesProvider.SuperNode sn2 : mSuperNodeList.toList())
+                        {
+                            try
+                            {
+                                RmiClient<INode> nodeClient = new RmiClient<>(sn2.ip, "NODE");
+                                nodeClient.getRemoteObj().requestRemoveSubNet(name);
+                            }
+                            catch(Exception e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        return null;
+                    }
+                    else
+                    {
+                        return sn;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        @Override
+        public String whichIsYourSuperNode()
+                throws RemoteException
+        {
+            try
+            {
+                FileInputStream is = new FileInputStream("mysupernode.asha");
+                byte[] data = new byte[32];
+                int length = is.read(data);
+                String ip = new String(data, 0, length);
+                is.close();
+                return ip;
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        public boolean areYouUp()
+                throws RemoteException
+        {
+            return true;
+        }
     }
 
     /**

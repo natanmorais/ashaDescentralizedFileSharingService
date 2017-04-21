@@ -1,5 +1,7 @@
 package br.asha.retalho.dfss;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -29,5 +31,17 @@ public interface INode extends Remote
      * @param name O nome da máquina.
      */
     int requestNewMachine(String ip, String name)
+            throws RemoteException;
+
+    boolean requestRemoveSubNet(String name)
+            throws RemoteException;
+
+    SuperNodesProvider.SuperNode verifySuperNodeDown(String ip, String name)
+            throws RemoteException, MalformedURLException, NotBoundException;
+
+    String whichIsYourSuperNode()
+            throws RemoteException;
+
+    boolean areYouUp()
             throws RemoteException;
 }

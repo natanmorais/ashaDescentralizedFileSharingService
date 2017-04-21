@@ -47,6 +47,18 @@ public class SuperNodesProvider
         save();
     }
 
+    public void removeByName(String name)
+    {
+        for(SuperNode sn : mList)
+        {
+            if(sn.subnetName.equals(name))
+            {
+                mList.remove(sn);
+                return;
+            }
+        }
+    }
+
     public void clear()
     {
         mList.clear();
