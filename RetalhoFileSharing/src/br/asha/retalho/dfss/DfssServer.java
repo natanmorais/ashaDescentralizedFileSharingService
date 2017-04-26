@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Scanner;
 
 import br.asha.retalho.dfss.provider.SharedFilesProvider;
 import br.asha.retalho.dfss.provider.SubNetMachinesProvider;
@@ -28,7 +29,7 @@ public class DfssServer
     protected String mName;
     protected String mIp;
     private OnFileListener mFileListener;
-
+    private Boolean iAmSuperNode = null;
     /**
      * Cria o servidor com o ip global.
      */
@@ -51,6 +52,16 @@ public class DfssServer
         mSuperNodeList = new SuperNodesProvider();
         mMachineList = new SubNetMachinesProvider();
         mSharedFileList = new SharedFilesProvider();
+
+        File file = new File("iamsupernode.asha");
+
+        if(!file.exists() || file.length() <= 0)
+        {
+        }
+        else
+        {
+            iAmSuperNode = new Scanner(file).nextBoolean();
+        }
     }
 
     public interface OnFileListener
@@ -221,6 +232,20 @@ public class DfssServer
         {
             mSharedFileList.updateList(sharedFileList);
             mMachineList.updateList(machineList);
+
+            for(SubNetMachinesProvider.Machine m : machineList)
+            {
+                try
+                {
+                    RmiClient<INode> machineClient = new RmiClient<>(m.ip, "NODE");
+                    machineClient.getRemoteObj().yourNewSuperNode(mIp);
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+
             return true;
         }
 
@@ -228,6 +253,23 @@ public class DfssServer
         public String getYourName()
         {
             return mName;
+        }
+
+        @Override
+        public void yourNewSuperNode(String ip)
+        {
+            try
+            {
+                OutputStream os = new FileOutputStream("mysupernode.asha");
+                os.write(ip.getBytes());
+                os.write("+".getBytes());
+                os.write(mName.getBytes());
+                os.close();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 

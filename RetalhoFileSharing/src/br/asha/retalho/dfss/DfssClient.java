@@ -51,6 +51,20 @@ public class DfssClient
         }
     }
 
+    private void setIAmSuperNode(boolean flag)
+    {
+        try
+        {
+            OutputStream os = new FileOutputStream("iamsupernode.asha");
+            os.write(String.valueOf(flag).getBytes());
+            os.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * @param name
      * @throws RemoteException
@@ -77,6 +91,8 @@ public class DfssClient
             }
         }
 
+        setIAmSuperNode(true);
+
         return true;
     }
 
@@ -93,6 +109,8 @@ public class DfssClient
             os.write(nomeSubRede.getBytes());
             os.close();
         }
+
+        setIAmSuperNode(false);
     }
 
     public void religamentoSistema()

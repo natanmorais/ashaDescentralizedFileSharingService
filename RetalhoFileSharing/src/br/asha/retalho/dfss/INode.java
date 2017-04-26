@@ -55,4 +55,6 @@ public interface INode extends Remote
             throws RemoteException;
 
     String getYourName();
+
+    void yourNewSuperNode(String ip);
 }
