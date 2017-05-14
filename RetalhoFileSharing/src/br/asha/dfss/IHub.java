@@ -11,7 +11,7 @@ public interface IHub
     HubType getHubType();
 
     @LocalMethod
-    String getHubName();
+    String getSubNetName();
 
     @LocalMethod
     String getServerIp();

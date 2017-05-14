@@ -13,23 +13,27 @@ import br.asha.dfss.utils.Utils;
 
 public class MasterHub extends SuperNodeHub implements IMaster, ILocalMaster
 {
-    public MasterHub(String hubName, String ip)
+    private String mNetName;
+
+    public MasterHub(String netName, String subNetName,  String ip)
             throws RemoteException, InstantiationException, IllegalAccessException
     {
-        super(HubType.MASTER, hubName, ip);
+        super(HubType.MASTER, subNetName, ip);
+        mNetName = netName;
     }
 
-    public MasterHub(String hubName)
+    public MasterHub(String netName, String subNetName)
             throws IllegalAccessException, RemoteException, InstantiationException
     {
-        super(HubType.MASTER, hubName, Utils.ipify());
+        super(HubType.MASTER, subNetName, Utils.ipify());
+        mNetName = netName;
     }
 
     @Override
     @LocalMethod
     public String getUID()
     {
-        String uid = getServerIp() + "+" + getHubName();
+        String uid = getServerIp() + "+" + this.getSubNetName();
         //TODO Usar função de criptografia e converter para hexadecimal.
         return uid;
     }

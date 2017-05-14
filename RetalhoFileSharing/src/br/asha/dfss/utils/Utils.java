@@ -75,4 +75,9 @@ public class Utils
     {
         System.out.printf(str + "\n", args);
     }
+
+    public static String getIpFromUID(String uid)
+    {
+        return uid.split("\\+")[0];
+    }
 }

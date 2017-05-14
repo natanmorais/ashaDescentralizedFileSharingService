@@ -152,6 +152,7 @@ public class SuperNodeHub extends NodeHub implements ISuperNode, ILocalSuperNode
     }
 
     @Override
+    @RemoteMethod
     public boolean requestRemoveSharedFile(SharedFile file)
             throws RemoteException
     {
@@ -170,6 +171,14 @@ public class SuperNodeHub extends NodeHub implements ISuperNode, ILocalSuperNode
             //Se já removeu quer dizer q já enviou para os outros.
             return false;
         }
+    }
+
+    @RemoteMethod
+    @Override
+    public boolean insertNewSuperNode(String name)
+            throws RemoteException
+    {
+        return false;
     }
 
     private void removeSharedFileByBroadcast(SharedFile file)
@@ -216,6 +225,9 @@ public class SuperNodeHub extends NodeHub implements ISuperNode, ILocalSuperNode
                 //Registra a rede no master.
                 //TODO Erro ao criar a rede pois já existe uma com o mesmo nome.
                 return masterClient.getRemoteObj().requestNewSuperNode(getSubNetName());
+
+                //TODO Enviar para os outros super-nós da lista avisando que ele é um novo super-nó.
+                //sendIAmNewSuperNode();
             }
             catch(RemoteException e)
             {
@@ -228,5 +240,20 @@ public class SuperNodeHub extends NodeHub implements ISuperNode, ILocalSuperNode
         }
 
         return false;
+    }
+
+    private void sendIAmNewSuperNode(String masterIp, List<SuperNode> superNodesList)
+    {
+        for(SuperNode sn : superNodesList)
+        {
+            if(sn.getIp().equals(masterIp) || sn.getIp().equals(getServerIp())) continue;
+
+            RmiClient<ISuperNode> superNodeClient = createClient(sn.getIp());
+
+            if(superNodeClient != null)
+            {
+                //superNodeClient.getRemoteObj().insertNewSuperNode(getSubNetName());
+            }
+        }
     }
 }

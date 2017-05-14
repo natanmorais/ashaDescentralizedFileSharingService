@@ -13,7 +13,7 @@ public abstract class DfssHub extends UnicastRemoteObject implements IHub
     //Tipo de máquina.
     private HubType mHubType;
     //Nome da máquina.
-    private String mHubName;
+    private String mSubNetName;
     //Server
     private RmiServer mServer;
 
@@ -22,7 +22,7 @@ public abstract class DfssHub extends UnicastRemoteObject implements IHub
     {
         super();
         mHubType = hubType;
-        mHubName = hubName;
+        mSubNetName = hubName;
         mServer = new RmiServer(this, ip, "RETALHO");
         mServer.start();
     }
@@ -56,9 +56,9 @@ public abstract class DfssHub extends UnicastRemoteObject implements IHub
 
     @Override
     @LocalMethod
-    public String getHubName()
+    public String getSubNetName()
     {
-        return mHubName;
+        return mSubNetName;
     }
 
     @Override

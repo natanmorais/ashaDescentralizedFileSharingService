@@ -24,4 +24,8 @@ public interface ISuperNode extends INode, Remote
     @RemoteMethod
     boolean requestRemoveSharedFile(SharedFile file)
             throws RemoteException;
+
+    @RemoteMethod
+    boolean insertNewSuperNode(String name)
+            throws RemoteException;
 }

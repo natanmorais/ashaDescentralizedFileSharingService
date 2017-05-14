@@ -49,7 +49,7 @@ public abstract class NodeHub extends DfssHub implements INode, ILocalNode
     public String requestName()
             throws RemoteException
     {
-        return getHubName();
+        return getSubNetName();
     }
 
     @Override
@@ -117,7 +117,7 @@ public abstract class NodeHub extends DfssHub implements INode, ILocalNode
             if(superNodeClient != null)
             {
                 //TODO Tratar melhor o erro?
-                if(superNodeClient.getRemoteObj().requestNewNode(getHubName()))
+                if(superNodeClient.getRemoteObj().requestNewNode(getSubNetName()))
                 {
                     mSuperNode = node;
                     return true;
