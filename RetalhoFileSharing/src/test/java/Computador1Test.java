@@ -12,10 +12,10 @@ import java.util.Date;
 public class Computador1Test {
     public ILocalSuperNode mHub;
 
-    public Computador1Test()
+    public Computador1Test(String masterIp)
             throws IllegalAccessException, RemoteException, InstantiationException {
         mHub = new SuperNodeHub("Computador 1");
-        for (SuperNode sn : mHub.getAvailableSuperNodes("")) {
+        for (SuperNode sn : mHub.getAvailableSuperNodes(masterIp)) {
             if (sn.getSubnetName().equals("Filial 1")) {
                 mHub.enterSubNet(sn);
                 break;
@@ -29,6 +29,6 @@ public class Computador1Test {
 
     public static void main(String[] args)
             throws IllegalAccessException, RemoteException, InstantiationException, InterruptedException {
-        Computador1Test m = new Computador1Test();
+        Computador1Test m = new Computador1Test(args[0]);
     }
 }
