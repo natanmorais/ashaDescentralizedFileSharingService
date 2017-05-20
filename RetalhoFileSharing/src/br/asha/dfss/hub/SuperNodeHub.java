@@ -573,6 +573,8 @@ public class SuperNodeHub extends DfssHub implements ISuperNode, ILocalSuperNode
                     e.printStackTrace();
                 }
             }
+        } else {
+            addFileInSuperNode(file);
         }
 
         return false;
