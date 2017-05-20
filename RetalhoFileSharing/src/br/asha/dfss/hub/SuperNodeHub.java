@@ -311,8 +311,12 @@ public class SuperNodeHub extends DfssHub implements ISuperNode, ILocalSuperNode
 
         for (Node n : getNodeList()) {
             RmiClient<ISuperNode> superNodeClient = createClient(n.getIp());
-            if (superNodeClient.getRemoteObj().transformSuperNode(listas)) {
-                return;
+            try {
+                if (superNodeClient.getRemoteObj().transformSuperNode(listas)) {
+                    return;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
@@ -340,7 +344,12 @@ public class SuperNodeHub extends DfssHub implements ISuperNode, ILocalSuperNode
                     e.printStackTrace();
                     continue;
                 }
-                listas = superNodeClient.getRemoteObj().leaveSuperNodeFunction();
+                try {
+                    listas = superNodeClient.getRemoteObj().leaveSuperNodeFunction();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                    return false;
+                }
                 getSuperNodeList().replace((List<SuperNode>) listas[0]);
                 getSharedFileList().replace((List<SharedFile>) listas[1]);
                 getNodeList().replace((List<Node>) listas[2]);
@@ -379,7 +388,12 @@ public class SuperNodeHub extends DfssHub implements ISuperNode, ILocalSuperNode
             return listas;
         } else {
             RmiClient<ISuperNode> superNodeClient = createClient(mSuperNode.getIp());
-            return superNodeClient.getRemoteObj().leaveSuperNodeFunction();
+            try {
+                return superNodeClient.getRemoteObj().leaveSuperNodeFunction();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
     }
 
@@ -453,7 +467,12 @@ public class SuperNodeHub extends DfssHub implements ISuperNode, ILocalSuperNode
             return false;
         }
 
-        return superNodeClient.getRemoteObj().sendNetStatus();
+        try {
+            return superNodeClient.getRemoteObj().sendNetStatus();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
