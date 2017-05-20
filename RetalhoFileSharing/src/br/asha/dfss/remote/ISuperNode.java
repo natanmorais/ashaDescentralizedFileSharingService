@@ -29,19 +29,24 @@ public interface ISuperNode extends Remote {
             throws RemoteException;
 
     @RemoteMethod
-    boolean sendNetStatus();
+    boolean sendNetStatus()
+            throws RemoteException;
 
     @RemoteMethod
-    String sendSuperNodeFromSubNet(String name);
+    String sendSuperNodeFromSubNet(String name)
+            throws RemoteException;
 
     @RemoteMethod
-    Object[] leaveSuperNodeFunction();
+    Object[] leaveSuperNodeFunction()
+            throws RemoteException;
 
     @RemoteMethod
-    boolean transformSuperNode(Object[] listas);
+    boolean transformSuperNode(Object[] listas)
+            throws RemoteException;
 
     @RemoteMethod
-    Object[] sendUpdate();
+    Object[] sendUpdate()
+            throws RemoteException;
 
     @RemoteMethod
     String requestName()
@@ -52,5 +57,6 @@ public interface ISuperNode extends Remote {
             throws RemoteException;
 
     @RemoteMethod
-    String findSuperNodeFromSubNet(String name);
+    String findSuperNodeFromSubNet(String name)
+            throws RemoteException;
 }

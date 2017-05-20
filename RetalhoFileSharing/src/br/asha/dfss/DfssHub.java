@@ -28,7 +28,6 @@ public abstract class DfssHub extends UnicastRemoteObject implements IHub
         mServer.start();
     }
 
-    @Nullable
     public static <T extends Remote> RmiClient<T> createClient(String ip)
     {
         try
