@@ -7,6 +7,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 import br.asha.dfss.rmi.RmiClient;
 import br.asha.dfss.rmi.RmiServer;
+import com.sun.istack.internal.Nullable;
 
 public abstract class DfssHub extends UnicastRemoteObject implements IHub
 {
@@ -27,6 +28,7 @@ public abstract class DfssHub extends UnicastRemoteObject implements IHub
         mServer.start();
     }
 
+    @Nullable
     public static <T extends Remote> RmiClient<T> createClient(String ip)
     {
         try
