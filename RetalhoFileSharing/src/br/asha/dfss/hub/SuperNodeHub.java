@@ -5,14 +5,19 @@ import br.asha.dfss.HubType;
 import br.asha.dfss.LocalMethod;
 import br.asha.dfss.RemoteMethod;
 import br.asha.dfss.local.ILocalSuperNode;
-import br.asha.dfss.model.*;
+import br.asha.dfss.model.Log;
+import br.asha.dfss.model.Node;
+import br.asha.dfss.model.SharedFile;
+import br.asha.dfss.model.SuperNode;
 import br.asha.dfss.remote.IMaster;
 import br.asha.dfss.remote.ISuperNode;
 import br.asha.dfss.repository.*;
 import br.asha.dfss.rmi.RmiClient;
 import br.asha.dfss.utils.Utils;
+import org.apache.commons.io.IOUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.rmi.RemoteException;
@@ -422,9 +427,17 @@ public class SuperNodeHub extends DfssHub implements ISuperNode, ILocalSuperNode
     @RemoteMethod
     public byte[] sendDataFile(String name)
             throws RemoteException {
-        LocalFile file = getLocalFileList().getByName(name);
-        if (file != null) return file.getData();
-        return null;
+        File file = new File(name);
+
+        if (file.exists()) {
+            try (FileInputStream fis = new FileInputStream(file)) {
+                return IOUtils.readFully(fis, (int) file.length());
+            } catch (Exception e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 
     @Override
