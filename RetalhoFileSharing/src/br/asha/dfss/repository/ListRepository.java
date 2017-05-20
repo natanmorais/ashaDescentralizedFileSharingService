@@ -13,7 +13,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ListRepository<T extends Serializable> implements Iterable<T> {
-    protected final HashSet<T> mUniquesList = new HashSet<>();
     private List<T> mList = new ArrayList<>(0);
     private String mFilename;
 
@@ -38,10 +37,7 @@ public class ListRepository<T extends Serializable> implements Iterable<T> {
             String json = IOUtils.toString(fis, "UTF-8");
             Gson gson = new Gson();
             mList = (List<T>) gson.fromJson(json, mList.getClass());
-
-            if (mList != null) {
-                mUniquesList.addAll(mList);
-            }
+            System.out.println(mList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -60,7 +56,7 @@ public class ListRepository<T extends Serializable> implements Iterable<T> {
     }
 
     public boolean contains(T item) {
-        return mUniquesList.contains(item);
+        return mList.contains(item);
     }
 
     public boolean add(T item) {
@@ -68,13 +64,7 @@ public class ListRepository<T extends Serializable> implements Iterable<T> {
     }
 
     public boolean remove(T item) {
-        if (contains(item)) {
-            mList.remove(item);
-            mUniquesList.remove(item);
-            return true;
-        } else {
-            return false;
-        }
+        return mList.remove(item);
     }
 
     public int size() {

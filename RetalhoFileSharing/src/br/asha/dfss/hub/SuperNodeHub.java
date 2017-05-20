@@ -255,6 +255,7 @@ public class SuperNodeHub extends DfssHub implements ISuperNode, ILocalSuperNode
 
     public boolean addFileInSuperNode(SharedFile file) {
         getSharedFileList().add(file);
+        getSharedFileList().save();
         addSharedFileByBroadcast(file);
         return true;
     }

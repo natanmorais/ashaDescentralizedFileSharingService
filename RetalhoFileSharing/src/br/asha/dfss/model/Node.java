@@ -1,9 +1,14 @@
 package br.asha.dfss.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Node implements Serializable {
+
+    @SerializedName("ip")
     private String mIp;
+    @SerializedName("name")
     private String mSubnetName;
 
     public Node(String ip, String subnetName) {
@@ -21,6 +26,10 @@ public class Node implements Serializable {
 
     public String getSubnetName() {
         return mSubnetName;
+    }
+
+    public void setmSubnetName(String subnetName) {
+        mSubnetName = subnetName;
     }
 
     @Override

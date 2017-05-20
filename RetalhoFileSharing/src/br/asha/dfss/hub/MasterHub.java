@@ -20,6 +20,7 @@ public class MasterHub extends SuperNodeHub implements IMaster, ILocalMaster
     {
         super(HubType.MASTER, subNetName, ip);
         mNetName = netName;
+        init();
     }
 
     public MasterHub(String netName, String subNetName)
@@ -27,6 +28,12 @@ public class MasterHub extends SuperNodeHub implements IMaster, ILocalMaster
     {
         super(HubType.MASTER, subNetName, Utils.ipify());
         mNetName = netName;
+        init();
+    }
+
+    private void init() {
+        getSuperNodeList().add(getServerIp(), getSubNetName());
+        getSuperNodeList().save();
     }
 
     @Override
