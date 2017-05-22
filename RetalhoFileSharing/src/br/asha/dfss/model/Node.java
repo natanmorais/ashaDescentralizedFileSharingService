@@ -4,42 +4,44 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+/**
+ * Super-Nó.
+ */
 public class Node implements Serializable {
 
     @SerializedName("ip")
-    private String mIp;
+    public String ip;
     @SerializedName("name")
-    private String mSubnetName;
+    public String name;
 
-    public Node(String ip, String subnetName) {
-        mIp = ip;
-        mSubnetName = subnetName;
+    public Node() {
     }
 
-    public String getIp() {
-        return mIp;
-    }
-
-    public void setIp(String ip) {
-        mIp = ip;
-    }
-
-    public String getSubnetName() {
-        return mSubnetName;
-    }
-
-    public void setmSubnetName(String subnetName) {
-        mSubnetName = subnetName;
+    public Node(String ip, String name) {
+        this.ip = ip;
+        this.name = name;
     }
 
     @Override
-    public int hashCode() {
-        return getSubnetName().hashCode();
+    public String toString() {
+        return "Node {" +
+                "ip='" + ip + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        return o instanceof Node &&
-                ((Node) o).getSubnetName().equals(getSubnetName());
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Node superNode = (Node) o;
+
+        return name.equals(superNode.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 }

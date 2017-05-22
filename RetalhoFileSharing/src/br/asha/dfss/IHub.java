@@ -2,20 +2,14 @@ package br.asha.dfss;
 
 import br.asha.dfss.rmi.RmiServer;
 
-public interface IHub
-{
-    @LocalMethod
-    RmiServer getServer();
+public interface IHub {
 
     @LocalMethod
-    HubType getHubType();
+    RmiServer getServidor();
 
     @LocalMethod
-    String getSubNetName();
+    String getNome();
 
     @LocalMethod
-    String getServerIp();
-
-    @LocalMethod
-    void stop();
+    String getMeuIp();
 }

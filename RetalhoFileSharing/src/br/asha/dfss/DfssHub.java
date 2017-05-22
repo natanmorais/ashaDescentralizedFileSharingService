@@ -1,91 +1,88 @@
 package br.asha.dfss;
 
+import br.asha.dfss.rmi.RmiClient;
+import br.asha.dfss.rmi.RmiServer;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.ServerNotActiveException;
 import java.rmi.server.UnicastRemoteObject;
 
-import br.asha.dfss.rmi.RmiClient;
-import br.asha.dfss.rmi.RmiServer;
-import com.sun.istack.internal.Nullable;
+/**
+ * Core de um Hub.
+ */
+public abstract class DfssHub extends UnicastRemoteObject implements IHub {
 
-public abstract class DfssHub extends UnicastRemoteObject implements IHub
-{
-    //Tipo de máquina.
-    private HubType mHubType;
-    //Nome da máquina.
-    private String mSubNetName;
-    //Server
-    private RmiServer mServer;
+    private String mNome;
+    private RmiServer mServidor;
 
-    public DfssHub(HubType hubType, String hubName, String ip)
-            throws RemoteException, InstantiationException, IllegalAccessException
-    {
+    /**
+     * Cria uma instância de um Hub.
+     */
+    public DfssHub(String nome, String ip, int porta)
+            throws RemoteException, InstantiationException, IllegalAccessException {
         super();
-        mHubType = hubType;
-        mSubNetName = hubName;
-        mServer = new RmiServer(this, ip, "RETALHO");
-        mServer.start();
+        mNome = nome;
+        mServidor = new RmiServer(this, ip, porta, "RETALHO");
+        mServidor.start();
     }
 
-    public static <T extends Remote> RmiClient<T> createClient(String ip)
-    {
-        try
-        {
+    /**
+     * Cria uma instância de um Hub.
+     */
+    public DfssHub(String nome, String ip)
+            throws RemoteException, InstantiationException, IllegalAccessException {
+        super();
+        mNome = nome;
+        mServidor = new RmiServer(this, ip, "RETALHO");
+        mServidor.start();
+    }
+
+    public static <T extends Remote> RmiClient<T> criarUmCliente(String ip) {
+        try {
             return new RmiClient<>(ip, "RETALHO");
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
+    /**
+     * Pega o servidor.
+     */
     @Override
     @LocalMethod
-    public RmiServer getServer()
-    {
-        return mServer;
+    public RmiServer getServidor() {
+        return mServidor;
     }
 
+    /**
+     * Pega o nome da rede.
+     */
     @Override
     @LocalMethod
-    public HubType getHubType()
-    {
-        return mHubType;
+    public String getNome() {
+        return mNome;
     }
 
+    /**
+     * Pega o meu IP.
+     */
     @Override
     @LocalMethod
-    public String getSubNetName()
-    {
-        return mSubNetName;
+    public String getMeuIp() {
+        return mServidor.getIp();
     }
 
-    @Override
+    /**
+     * Pega o IP do cliente.
+     */
     @LocalMethod
-    public String getServerIp()
-    {
-        return mServer.getIp();
-    }
-
-    @LocalMethod
-    protected String getClientIp()
-    {
-        try
-        {
+    protected String getIpDoCliente() {
+        try {
             return getClientHost();
-        }
-        catch(ServerNotActiveException e)
-        {
+        } catch (ServerNotActiveException e) {
             return null;
         }
-    }
-
-    @Override
-    @LocalMethod
-    public void stop()
-    {
-        mServer.stop();
     }
 }

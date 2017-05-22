@@ -6,75 +6,59 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.Serializable;
 
-public class LocalFile implements Serializable
-{
+public class LocalFile implements Serializable {
     private String mBasePath;
     private String mName;
     private String mSha;
 
-    public LocalFile(String basePath, String name, String sha)
-    {
+    public LocalFile(String basePath, String name, String sha) {
         mBasePath = basePath;
         mName = name;
         mSha = sha;
     }
 
-    public String getBasePath()
-    {
+    public String getBasePath() {
         return mBasePath;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return mName;
     }
 
-    public String getSha()
-    {
+    public String getSha() {
         return mSha;
     }
 
-    public File getFile()
-    {
+    public File getFile() {
         return new File(getBasePath(), getName());
     }
 
-    public boolean exists()
-    {
+    public boolean exists() {
         return getFile().exists();
     }
 
-    public byte[] getData()
-    {
+    public byte[] getData() {
         File file = getFile();
 
-        if(file.exists())
-        {
-            try(FileInputStream fis = new FileInputStream(file))
-            {
-                return IOUtils.readFully(fis, (int)file.length());
-            }
-            catch(Exception e)
-            {
+        if (file.exists()) {
+            try (FileInputStream fis = new FileInputStream(file)) {
+                return IOUtils.readFully(fis, (int) file.length());
+            } catch (Exception e) {
                 return null;
             }
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return mName.hashCode();
     }
 
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         return o instanceof LocalFile &&
-                ((LocalFile)o).getName().equals(getName());
+                ((LocalFile) o).getName().equals(getName());
     }
 }

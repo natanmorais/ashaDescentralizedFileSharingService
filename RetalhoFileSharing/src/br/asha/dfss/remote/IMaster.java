@@ -1,16 +1,25 @@
 package br.asha.dfss.remote;
 
+import br.asha.dfss.RemoteMethod;
+import br.asha.dfss.model.Node;
+import br.asha.dfss.repository.Repository;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.List;
 
-import br.asha.dfss.model.SuperNode;
+public interface IMaster extends INode, Remote {
 
-public interface IMaster extends ISuperNode, Remote
-{
+    Repository<Node> alguemQuerCriarUmaRede(String nome)
+            throws RemoteException;
+
+    Repository<Node> alguemQuerAListaDeSubRedes()
+        throws RemoteException;
+
+    /*
     boolean requestNewSuperNode(String name)
             throws RemoteException;
 
     List<SuperNode> requestAvailableSuperNodes()
             throws RemoteException;
+            */
 }

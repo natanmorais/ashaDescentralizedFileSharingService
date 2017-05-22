@@ -1,13 +1,17 @@
 package br.asha.dfss.remote;
 
-import br.asha.dfss.RemoteMethod;
-import br.asha.dfss.model.SharedFile;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.List;
 
-public interface ISuperNode extends Remote {
+public interface INode extends Remote {
+
+    boolean alguemQuerEntrarNaMinhaRede(String nome)
+            throws RemoteException;
+
+    boolean alguemQuerSaberSeEstouOnline()
+            throws RemoteException;
+
+    /*
     @RemoteMethod
     boolean requestNewNode(String name)
             throws RemoteException;
@@ -59,4 +63,5 @@ public interface ISuperNode extends Remote {
     @RemoteMethod
     String findSuperNodeFromSubNet(String name)
             throws RemoteException;
+            */
 }

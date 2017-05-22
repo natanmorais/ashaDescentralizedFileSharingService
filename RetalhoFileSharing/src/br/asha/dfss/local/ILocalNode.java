@@ -1,14 +1,20 @@
 package br.asha.dfss.local;
 
 import br.asha.dfss.LocalMethod;
-import br.asha.dfss.model.SharedFile;
-import br.asha.dfss.model.SuperNode;
-import br.asha.dfss.repository.LocalFileRepository;
+import br.asha.dfss.model.Node;
+import br.asha.dfss.repository.Repository;
 
-import java.io.File;
-import java.util.List;
+public interface ILocalNode {
 
-public interface ILocalSuperNode {
+    Repository<Node> queroCriarUmaSubRede(String ipDoMaster);
+
+    Repository<Node> queroAListaDeSubRedesAtuais(String ipDoMaster);
+
+    boolean queroEntrarEmUmaSubRede(Node subRede);
+
+    boolean queroSaberSeEstaOnline(String ip);
+
+    /*
     @LocalMethod
     boolean createNewSubNet(String masterIp, String subNetName);
 
@@ -61,4 +67,5 @@ public interface ILocalSuperNode {
 
     @LocalMethod
     boolean letMeBeTheSuperNode(String ip);
+    */
 }

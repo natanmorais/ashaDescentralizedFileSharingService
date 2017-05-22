@@ -1,9 +1,7 @@
 package br.asha.dfss.model;
 
-public class MasterNode extends SuperNode
-{
-    public MasterNode(String ip, String subnetName)
-    {
+public class MasterNode extends Node {
+    public MasterNode(String ip, String subnetName) {
         super(ip, subnetName);
     }
 }

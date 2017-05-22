@@ -1,68 +1,80 @@
 package br.asha.dfss.hub;
 
-import java.rmi.RemoteException;
-import java.util.List;
-
-import br.asha.dfss.HubType;
-import br.asha.dfss.LocalMethod;
 import br.asha.dfss.RemoteMethod;
 import br.asha.dfss.local.ILocalMaster;
-import br.asha.dfss.model.SuperNode;
+import br.asha.dfss.model.Node;
 import br.asha.dfss.remote.IMaster;
+import br.asha.dfss.repository.SubNetNodeList;
+import br.asha.dfss.repository.Repository;
+import br.asha.dfss.repository.SubNetList;
 import br.asha.dfss.utils.Utils;
 
-public class MasterHub extends SuperNodeHub implements IMaster, ILocalMaster
-{
-    private String mNetName;
+import java.rmi.RemoteException;
 
-    public MasterHub(String netName, String subNetName,  String ip)
-            throws RemoteException, InstantiationException, IllegalAccessException
-    {
-        super(HubType.MASTER, subNetName, ip);
-        mNetName = netName;
+public class MasterHub extends NodeHub implements IMaster, ILocalMaster {
+
+    public MasterHub(String nome, String ip, int porta)
+            throws RemoteException, InstantiationException, IllegalAccessException {
+        super(true, nome, ip, porta);
         init();
     }
 
-    public MasterHub(String netName, String subNetName)
-            throws IllegalAccessException, RemoteException, InstantiationException
-    {
-        super(HubType.MASTER, subNetName, Utils.ipify());
-        mNetName = netName;
+    public MasterHub(String nome, int porta)
+            throws IllegalAccessException, RemoteException, InstantiationException {
+        super(true, nome, Utils.ipify(), porta);
+        init();
+    }
+
+    public MasterHub(String nome)
+            throws IllegalAccessException, RemoteException, InstantiationException {
+        super(true, nome);
         init();
     }
 
     private void init() {
-        getSuperNodeList().add(getServerIp(), getSubNetName());
-        getSuperNodeList().save();
+        SubNetList.getInstance(getNome()).add(getMeuIp(), getNome());
     }
 
+    @RemoteMethod
     @Override
-    @LocalMethod
-    public String getUID()
-    {
-        String uid = getServerIp() + "+" + this.getSubNetName();
-        //TODO Usar função de criptografia e converter para hexadecimal.
-        return uid;
+    public Repository<Node> alguemQuerCriarUmaRede(String nome)
+            throws RemoteException {
+        Utils.log("alguemQuerCriarUmaRede(%s)", nome);
+
+        //IP do cara que quer criar uma rede.
+        final String ipDoCliente = getIpDoCliente();
+        //Adicione-o.
+        if (SubNetList.getInstance(getNome()).add(ipDoCliente, nome)) {
+            //Retorna a lista de IPs.
+            return SubNetList.getInstance(getNome());
+        } else {
+            return null;
+        }
     }
+
+    @RemoteMethod
+    @Override
+    public Repository<Node> alguemQuerAListaDeSubRedes()
+            throws RemoteException {
+        return SubNetList.getInstance(getNome());
+    }
+
+    /*
 
     @Override
     @RemoteMethod
     public boolean requestNewSuperNode(String name)
-            throws RemoteException
-    {
-        String clientIp = getClientIp();
+            throws RemoteException {
+        String clientIp = getIpDoCliente();
 
         Utils.log("registerSuperNode: %s:%s", name, clientIp);
 
         //Registrar uma nova sub-rede (IP e Nome).
-        if(getSuperNodeList().add(clientIp, name) &&
-                getSuperNodeList().save())
-        {
+        if (getSuperNodeList().add(clientIp, name) &&
+                getSuperNodeList().save()) {
             Utils.log("Sub-rede %s:%s registrada", name, clientIp);
             return true;
-        }
-        else
-        {
+        } else {
             Utils.log("Erro ao registrar a sub-rede %s:%s", name, clientIp);
             return false;
         }
@@ -71,9 +83,10 @@ public class MasterHub extends SuperNodeHub implements IMaster, ILocalMaster
     @Override
     @RemoteMethod
     public List<SuperNode> requestAvailableSuperNodes()
-            throws RemoteException
-    {
+            throws RemoteException {
         Utils.log("getAvailableSuperNodes");
         return getSuperNodeList().toList();
     }
+
+    */
 }
