@@ -14,8 +14,10 @@ import br.asha.dfss.repository.SubNetList;
 import br.asha.dfss.repository.SubNetNodeList;
 import br.asha.dfss.rmi.RmiClient;
 import br.asha.dfss.utils.Utils;
+import org.apache.commons.io.IOUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.rmi.RemoteException;
 
 public class NodeHub extends DfssHub implements INode, ILocalNode {
@@ -196,7 +198,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
         SharedFile sharedFile;
 
         try {
-            sharedFile = new SharedFile(getMeuIp(), file);
+            sharedFile = new SharedFile(getMeuIp(), new File("meuArquivosParaCompartilhar", file.getName()));
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -229,7 +231,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
         //Eu sou o master
         else if (this instanceof MasterHub) {
             try {
-                alguemQuerCompartilharUmArquivo(sharedFile, true);
+                return alguemQuerCompartilharUmArquivo(sharedFile, true);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -242,7 +244,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
     @RemoteMethod
     public boolean alguemQuerCompartilharUmArquivo(SharedFile file, boolean reenviar)
             throws RemoteException {
-        Utils.log("alguemQuerCompartilharUmArquivo(%s)", file);
+        Utils.log("alguemQuerCompartilharUmArquivo(%s, %b)", file, reenviar);
 
         //O mesmo arquivo (SHA e Nome batem) mas ips diferentes.
         //O mesmo arquivo (Nomes batem) mas conteudo diferente.
@@ -275,7 +277,82 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
         }
     }
 
+    @LocalMethod
+    @Override
+    public Repository<SharedFile> queroAListaDeArquivosCompartilhados() {
+        Utils.log("queroAListaDeArquivosCompartilhados()");
 
+        //Eu sou um nó.
+        if (meuSuperNo != null) {
+            RmiClient<INode> superNo = criarUmCliente(meuSuperNo.ip);
+            if (superNo != null) {
+                try {
+                    return superNo.getRemoteObj().alguemQuerAListaDeArquivosCompartilhados();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        //Eu sou um super-nó.
+        else if (ipDoMaster != null) {
+            try {
+                return alguemQuerAListaDeArquivosCompartilhados();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        //Eu sou o master
+        else if (this instanceof MasterHub) {
+            try {
+                return alguemQuerAListaDeArquivosCompartilhados();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return null;
+    }
+
+    @RemoteMethod
+    @Override
+    public Repository<SharedFile> alguemQuerAListaDeArquivosCompartilhados()
+            throws RemoteException {
+        Utils.log("%s: alguemQuerAListaDeArquivosCompartilhados()", getNome());
+        return SharedFileList.getInstance(getNome());
+    }
+
+    //Executa essa funcao para cada arquivo encontrado (com o mesmo nome) se houver um erro.
+    //
+    @LocalMethod
+    @Override
+    public byte[] queroOArquivo(SharedFile file) {
+        Utils.log("queroOArquivo(%s)", file);
+
+        RmiClient<INode> no = criarUmCliente(file.ip);
+        if (no != null) {
+            try {
+                return no.getRemoteObj().alguemQuerUmArquivo(file.nome);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    @RemoteMethod
+    @Override
+    public byte[] alguemQuerUmArquivo(String nome)
+            throws RemoteException {
+        File file = new File("meuArquivosParaCompartilhar", nome);
+        try (FileInputStream fis = new FileInputStream(file)) {
+            return IOUtils.readFully(fis, (int) file.length());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     /*
     @Override

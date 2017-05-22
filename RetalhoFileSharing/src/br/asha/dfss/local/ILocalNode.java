@@ -1,7 +1,7 @@
 package br.asha.dfss.local;
 
-import br.asha.dfss.LocalMethod;
 import br.asha.dfss.model.Node;
+import br.asha.dfss.model.SharedFile;
 import br.asha.dfss.repository.Repository;
 
 import java.io.File;
@@ -17,6 +17,10 @@ public interface ILocalNode {
     boolean queroSaberSeEstaOnline(String ip);
 
     boolean queroCompartilharUmArquivo(File file);
+
+    Repository<SharedFile> queroAListaDeArquivosCompartilhados();
+
+    byte[] queroOArquivo(SharedFile file);
 
     /*
     @LocalMethod
