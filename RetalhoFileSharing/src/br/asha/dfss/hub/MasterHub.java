@@ -37,7 +37,7 @@ public class MasterHub extends NodeHub implements IMaster, ILocalMaster {
 
     @RemoteMethod
     @Override
-    public Repository<Node> alguemQuerCriarUmaRede(String nome)
+    public SubNetList alguemQuerCriarUmaRede(String nome)
             throws RemoteException {
         Utils.log("alguemQuerCriarUmaRede(%s)", nome);
 
@@ -54,7 +54,7 @@ public class MasterHub extends NodeHub implements IMaster, ILocalMaster {
 
     @RemoteMethod
     @Override
-    public Repository<Node> alguemQuerAListaDeSubRedes()
+    public SubNetList alguemQuerAListaDeSubRedes()
             throws RemoteException {
         return SubNetList.getInstance(getNome());
     }

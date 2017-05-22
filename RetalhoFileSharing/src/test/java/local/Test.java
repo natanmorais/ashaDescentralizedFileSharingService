@@ -21,7 +21,7 @@ public class Test {
         NodeHub mNatan = new NodeHub(false, "Natan", "127.0.0.1", 1096);
         mNatan.setIpDoMaster("127.0.0.1");
         //Tiago quer criar uma rede.
-        SubNetList listaDeSuperNos = (SubNetList) mTiago.queroCriarUmaSubRede();
+        SubNetList listaDeSuperNos = mTiago.queroCriarUmaSubRede();
         Utils.log("%s", listaDeSuperNos);
         //Natan quer entrar em uma sub-rede.
         Utils.log("Entrou na sub-rede: %b",
@@ -30,7 +30,7 @@ public class Test {
         //Asha é que vai acabar recebendo..
         mNatan.queroCompartilharUmArquivo(new File("meuArquivosParaCompartilhar/oi.txt"));
         //Se a lista de Tiago estiver vazia, coloque na mão mesmo.
-        SharedFileList sfl = (SharedFileList) mTiago.queroAListaDeArquivosCompartilhados();
+        SharedFileList sfl = mTiago.queroAListaDeArquivosCompartilhados();
         Utils.log("%s", sfl);
         byte[] data = mTiago.queroOArquivo(sfl.get(0));
         System.out.println(new String(data));

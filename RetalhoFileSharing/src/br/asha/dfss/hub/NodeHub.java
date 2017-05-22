@@ -63,7 +63,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
      */
     @LocalMethod
     @Override
-    public Repository<Node> queroCriarUmaSubRede() {
+    public SubNetList queroCriarUmaSubRede() {
         Utils.log("queroCriarUmaSubRede(%s)", ipDoMaster);
 
         //Só um super-nó pode criar uma rede.
@@ -78,7 +78,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
             Utils.log("o Master aceitou a conexao");
             try {
                 //Pede ao master para registrar-se.
-                Repository<Node> listaDeSubRedes =
+                SubNetList listaDeSubRedes =
                         c.getRemoteObj().alguemQuerCriarUmaRede(getNome());
                 Utils.log("O Master retornou: %s", listaDeSubRedes);
                 //Substitui sua lista com a lista retornada do Master.
@@ -102,7 +102,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
 
     @LocalMethod
     @Override
-    public Repository<Node> queroAListaDeSubRedesAtuais() {
+    public SubNetList queroAListaDeSubRedesAtuais() {
         Utils.log("queroAListaDeSubRedesAtuais");
 
         //Cria o cliente.
@@ -279,7 +279,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
 
     @LocalMethod
     @Override
-    public Repository<SharedFile> queroAListaDeArquivosCompartilhados() {
+    public SharedFileList queroAListaDeArquivosCompartilhados() {
         Utils.log("queroAListaDeArquivosCompartilhados()");
 
         //Eu sou um nó.
@@ -315,7 +315,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
 
     @RemoteMethod
     @Override
-    public Repository<SharedFile> alguemQuerAListaDeArquivosCompartilhados()
+    public SharedFileList alguemQuerAListaDeArquivosCompartilhados()
             throws RemoteException {
         Utils.log("%s: alguemQuerAListaDeArquivosCompartilhados()", getNome());
         return SharedFileList.getInstance(getNome());
