@@ -16,16 +16,18 @@ public class Test {
         MasterHub mMaster = new MasterHub("Asha", "127.0.0.1", 1098);
         //Novo super-nó.
         NodeHub mTiago = new NodeHub(true, "Tiago", "127.0.0.1", 1097);
+        mTiago.setIpDoMaster("127.0.0.1");
         //Novo nó.
         NodeHub mNatan = new NodeHub(false, "Natan", "127.0.0.1", 1096);
+        mNatan.setIpDoMaster("127.0.0.1");
         //Tiago quer criar uma rede.
-        SubNetList listaDeSuperNos = (SubNetList)mTiago.queroCriarUmaSubRede(mMaster.getMeuIp());
+        SubNetList listaDeSuperNos = (SubNetList)mTiago.queroCriarUmaSubRede();
         Utils.log("%s", listaDeSuperNos);
 
         //Natan quer entrar em uma sub-rede.
         //Usará o primeiro da lista.
         Utils.log("Entrou na sub-rede: %b",
                 //Como Asha e Tiago tem o mesmo ip, vai entrar na Rede Asha pois usa a porta padrão
-                mNatan.queroEntrarEmUmaSubRede(listaDeSuperNos.getByName("Tiago")));
+                mNatan.queroEntrarEmUmaSubRede(listaDeSuperNos.getByName("Asha")));
     }
 }

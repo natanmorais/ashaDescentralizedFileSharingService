@@ -1,5 +1,7 @@
 package br.asha.dfss.remote;
 
+import br.asha.dfss.model.SharedFile;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -10,6 +12,9 @@ public interface INode extends Remote {
 
     boolean alguemQuerSaberSeEstouOnline()
             throws RemoteException;
+
+    boolean alguemQuerCompartilharUmArquivo(SharedFile file, boolean reenviar)
+        throws RemoteException;
 
     /*
     @RemoteMethod

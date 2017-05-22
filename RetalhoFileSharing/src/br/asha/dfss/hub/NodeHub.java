@@ -5,19 +5,24 @@ import br.asha.dfss.LocalMethod;
 import br.asha.dfss.RemoteMethod;
 import br.asha.dfss.local.ILocalNode;
 import br.asha.dfss.model.Node;
+import br.asha.dfss.model.SharedFile;
 import br.asha.dfss.remote.IMaster;
 import br.asha.dfss.remote.INode;
 import br.asha.dfss.repository.Repository;
+import br.asha.dfss.repository.SharedFileList;
 import br.asha.dfss.repository.SubNetList;
 import br.asha.dfss.repository.SubNetNodeList;
 import br.asha.dfss.rmi.RmiClient;
 import br.asha.dfss.utils.Utils;
 
+import java.io.File;
 import java.rmi.RemoteException;
 
 public class NodeHub extends DfssHub implements INode, ILocalNode {
 
     private boolean euSouUmSuperNo;
+    private Node meuSuperNo;
+    private String ipDoMaster;
 
     public NodeHub(boolean euSouUmSuperNo, String nome, String ip, int porta)
             throws RemoteException, InstantiationException, IllegalAccessException {
@@ -44,15 +49,18 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
         SubNetNodeList.getInstance(getNome()).add(getMeuIp(), getNome());
     }
 
+    public void setIpDoMaster(String ipDoMaster) {
+        this.ipDoMaster = ipDoMaster;
+    }
+
     /**
      * Um super-nó quer criar uma sub-rede.
      *
-     * @param ipDoMaster O Ip do mestre.
      * @return retorna a lista de sub-redes existentes.
      */
     @LocalMethod
     @Override
-    public Repository<Node> queroCriarUmaSubRede(String ipDoMaster) {
+    public Repository<Node> queroCriarUmaSubRede() {
         Utils.log("queroCriarUmaSubRede(%s)", ipDoMaster);
 
         //Só um super-nó pode criar uma rede.
@@ -91,7 +99,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
 
     @LocalMethod
     @Override
-    public Repository<Node> queroAListaDeSubRedesAtuais(String ipDoMaster) {
+    public Repository<Node> queroAListaDeSubRedesAtuais() {
         Utils.log("queroAListaDeSubRedesAtuais");
 
         //Cria o cliente.
@@ -128,8 +136,13 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
         if (c != null) {
             Utils.log("o super-nó aceitou a conexao");
             try {
-                //Retorna a lista de sub-redes cadastrada no master.
-                return c.getRemoteObj().alguemQuerEntrarNaMinhaRede(getNome());
+                //Cadastro edefutado com sucesso.
+                if (c.getRemoteObj().alguemQuerEntrarNaMinhaRede(getNome())) {
+                    meuSuperNo = subRede;
+                    return true;
+                } else {
+                    return false;
+                }
             } catch (RemoteException e) {
                 e.printStackTrace();
                 return false;
@@ -174,6 +187,87 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
             throws RemoteException {
         Utils.log("alguemQuerSaberSeEstouOnline()");
         return true;
+    }
+
+    @LocalMethod
+    @Override
+    public boolean queroCompartilharUmArquivo(File file) {
+        SharedFile sharedFile;
+
+        try {
+            sharedFile = new SharedFile(getMeuIp(), file);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        Utils.log("queroCompartilharUmArquivo(%s)", sharedFile);
+
+        //Eu sou um nó.
+        if (meuSuperNo != null) {
+            RmiClient<INode> superNo = criarUmCliente(meuSuperNo.ip);
+            if (superNo != null) {
+                try {
+                    return superNo.getRemoteObj().alguemQuerCompartilharUmArquivo(sharedFile, true);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        //Eu sou um super-nó.
+        else if (ipDoMaster != null) {
+            RmiClient<INode> master = criarUmCliente(ipDoMaster);
+            if (master != null) {
+                try {
+                    return master.getRemoteObj().alguemQuerCompartilharUmArquivo(sharedFile, true);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        //Eu sou o master
+        else if (this instanceof MasterHub) {
+            try {
+                alguemQuerCompartilharUmArquivo(sharedFile, true);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    @RemoteMethod
+    public boolean alguemQuerCompartilharUmArquivo(SharedFile file, boolean reenviar)
+            throws RemoteException {
+        //O mesmo arquivo (SHA e Nome batem) mas ips diferentes.
+        //O mesmo arquivo (Nomes batem) mas conteudo diferente.
+        //Arquivos diferentes mas ip iguais.
+        if (SharedFileList.getInstance(getNome()).add(file)) {
+            if (reenviar) {
+                //Reenvia para outros nós.
+                for (Node node : SubNetList.getInstance(getNome())) {
+                    //Não enviar pra mim mesmo.
+                    if (!node.ip.equals(getMeuIp())) {
+                        //Abre a conexao com um super-nó.
+                        RmiClient<INode> superNo = criarUmCliente(node.ip);
+                        //Conexao aceita.
+                        if (superNo != null) {
+                            try {
+                                //Informa o compartilhamento do arquivo ao super-nó.
+                                superNo.getRemoteObj().alguemQuerCompartilharUmArquivo(file, false);
+                            } catch (Exception ignored) {
+                                //nada
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /*

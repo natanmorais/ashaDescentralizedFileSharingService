@@ -1,58 +1,66 @@
 package br.asha.dfss.model;
 
+import br.asha.dfss.utils.Utils;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.File;
 import java.io.Serializable;
 
 public class SharedFile implements Serializable {
-    private String mIp;
-    private String mName;
-    private String mSha;
-    private long mLastModifiedDate;
+    @SerializedName("ip")
+    public String ip;
+    @SerializedName("name")
+    public String nome;
+    @SerializedName("sha")
+    public String sha;
+    @SerializedName("updateAt")
+    public long dataDaUltimaAtualicao;
 
-    public SharedFile(String ip, String name, String sha, long lastModifiedDate) {
-        mIp = ip;
-        mName = name;
-        mSha = sha;
-        mLastModifiedDate = lastModifiedDate;
+    public SharedFile() {
     }
 
-    public String getIp() {
-        return mIp;
+    public SharedFile(String ip, File file)
+            throws Exception {
+        this.ip = ip;
+        this.dataDaUltimaAtualicao = file.lastModified();
+        this.nome = file.getName();
+        this.sha = Utils.generateSHA1ForFile(file);
     }
 
-    public String getName() {
-        return mName;
-    }
-
-    public String getSha() {
-        return mSha;
-    }
-
-    public long getLastModifiedDate() {
-        return mLastModifiedDate;
+    public SharedFile(String ip, String nome, String sha, long dataDaUltimaAtualicao) {
+        this.ip = ip;
+        this.nome = nome;
+        this.sha = sha;
+        this.dataDaUltimaAtualicao = dataDaUltimaAtualicao;
     }
 
     @Override
     public boolean equals(Object o) {
-        return o instanceof SharedFile &&
-                getName().equalsIgnoreCase(((SharedFile) o).getName()) &&
-                getSha().equals(((SharedFile) o).getSha());
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SharedFile that = (SharedFile) o;
+
+        if (!ip.equals(that.ip)) return false;
+        if (!nome.equals(that.nome)) return false;
+        return sha.equals(that.sha);
     }
 
     @Override
     public int hashCode() {
-        //Arquivos em diferentes máquinas são ditos IGUAIS se tiverem o mesmo nome e o mesmo conteúdo(sha).
-        int result = getName().toLowerCase().hashCode();
-        result = 31 * result + getSha().hashCode();
+        int result = ip.hashCode();
+        result = 31 * result + nome.hashCode();
+        result = 31 * result + sha.hashCode();
         return result;
     }
 
     @Override
     public String toString() {
         return "SharedFile {" +
-                "ip='" + mIp + '\'' +
-                ", name='" + mName + '\'' +
-                ", sha='" + mSha + '\'' +
-                ", lastModifiedDate=" + mLastModifiedDate +
+                "ip='" + ip + '\'' +
+                ", nome='" + nome + '\'' +
+                ", sha='" + sha + '\'' +
+                ", dataDaUltimaAtualicao=" + dataDaUltimaAtualicao +
                 '}';
     }
 }

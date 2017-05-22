@@ -4,15 +4,19 @@ import br.asha.dfss.LocalMethod;
 import br.asha.dfss.model.Node;
 import br.asha.dfss.repository.Repository;
 
+import java.io.File;
+
 public interface ILocalNode {
 
-    Repository<Node> queroCriarUmaSubRede(String ipDoMaster);
+    Repository<Node> queroCriarUmaSubRede();
 
-    Repository<Node> queroAListaDeSubRedesAtuais(String ipDoMaster);
+    Repository<Node> queroAListaDeSubRedesAtuais();
 
     boolean queroEntrarEmUmaSubRede(Node subRede);
 
     boolean queroSaberSeEstaOnline(String ip);
+
+    boolean queroCompartilharUmArquivo(File file);
 
     /*
     @LocalMethod
