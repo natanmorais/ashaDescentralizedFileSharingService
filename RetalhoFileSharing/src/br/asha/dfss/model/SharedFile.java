@@ -42,14 +42,14 @@ public class SharedFile implements Serializable {
         SharedFile that = (SharedFile) o;
 
         if (!ip.equals(that.ip)) return false;
-        if (!nome.equals(that.nome)) return false;
+        //if (!nome.equals(that.nome)) return false;
         return sha.equals(that.sha);
     }
 
     @Override
     public int hashCode() {
         int result = ip.hashCode();
-        result = 31 * result + nome.hashCode();
+        //result = 31 * result + nome.hashCode();
         result = 31 * result + sha.hashCode();
         return result;
     }

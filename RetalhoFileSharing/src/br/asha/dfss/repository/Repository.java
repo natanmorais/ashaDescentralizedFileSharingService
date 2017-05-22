@@ -67,7 +67,7 @@ public abstract class Repository<T extends Serializable> extends ArrayList<T> im
 
     public boolean remove(T item) {
         try {
-            return remove(item);
+            return super.remove(item);
         } finally {
             save();
         }

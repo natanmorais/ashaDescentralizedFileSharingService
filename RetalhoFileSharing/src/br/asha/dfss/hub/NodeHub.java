@@ -47,6 +47,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
 
     private void init() {
         SubNetNodeList.getInstance(getNome()).add(getMeuIp(), getNome());
+        SharedFileList.getInstance(getNome()).carregar();
     }
 
     public void setIpDoMaster(String ipDoMaster) {
@@ -241,11 +242,15 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
     @RemoteMethod
     public boolean alguemQuerCompartilharUmArquivo(SharedFile file, boolean reenviar)
             throws RemoteException {
+        Utils.log("alguemQuerCompartilharUmArquivo(%s)", file);
+
         //O mesmo arquivo (SHA e Nome batem) mas ips diferentes.
         //O mesmo arquivo (Nomes batem) mas conteudo diferente.
         //Arquivos diferentes mas ip iguais.
         if (SharedFileList.getInstance(getNome()).add(file)) {
+            Utils.log("O arquivo foi adicionado");
             if (reenviar) {
+                Utils.log("Reenviando...");
                 //Reenvia para outros nós.
                 for (Node node : SubNetList.getInstance(getNome())) {
                     //Não enviar pra mim mesmo.
@@ -269,6 +274,8 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
             return false;
         }
     }
+
+
 
     /*
     @Override
