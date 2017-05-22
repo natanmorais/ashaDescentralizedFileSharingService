@@ -198,7 +198,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
         SharedFile sharedFile;
 
         try {
-            sharedFile = new SharedFile(getMeuIp(), new File("meuArquivosParaCompartilhar", file.getName()));
+            sharedFile = new SharedFile(getMeuIp(), file);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -345,7 +345,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
     @Override
     public byte[] alguemQuerUmArquivo(String nome)
             throws RemoteException {
-        File file = new File("meuArquivosParaCompartilhar", nome);
+        File file = new File(nome);
         try (FileInputStream fis = new FileInputStream(file)) {
             return IOUtils.readFully(fis, (int) file.length());
         } catch (Exception e) {

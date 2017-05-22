@@ -28,7 +28,7 @@ public class Test {
                 //Como Asha e Tiago tem o mesmo ip, vai entrar na Rede Asha pois usa a porta padrão
                 mNatan.queroEntrarEmUmaSubRede(listaDeSuperNos.getByName("Asha")));
         //Asha é que vai acabar recebendo..
-        mNatan.queroCompartilharUmArquivo(new File("oi.txt"));
+        mNatan.queroCompartilharUmArquivo(new File("meuArquivosParaCompartilhar/oi.txt"));
         //Se a lista de Tiago estiver vazia, coloque na mão mesmo.
         SharedFileList sfl = (SharedFileList) mTiago.queroAListaDeArquivosCompartilhados();
         Utils.log("%s", sfl);

@@ -23,7 +23,7 @@ public class SharedFile implements Serializable {
             throws Exception {
         this.ip = ip;
         this.dataDaUltimaAtualicao = file.lastModified();
-        this.nome = file.getName();
+        this.nome = file.getPath();
         this.sha = Utils.generateSHA1ForFile(file);
     }
 
