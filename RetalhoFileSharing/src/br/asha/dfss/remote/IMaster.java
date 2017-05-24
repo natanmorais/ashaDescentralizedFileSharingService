@@ -17,7 +17,7 @@ public interface IMaster extends INode, Remote {
         throws RemoteException;
 
     /*
-    boolean requestNewSuperNode(String name)
+    boolean requestNewSuperNode(String nome)
             throws RemoteException;
 
     List<SuperNode> requestAvailableSuperNodes()

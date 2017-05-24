@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class SharedFile implements Serializable {
     @SerializedName("ip")
     public String ip;
-    @SerializedName("name")
+    @SerializedName("nome")
     public String nome;
     @SerializedName("sha")
     public String sha;

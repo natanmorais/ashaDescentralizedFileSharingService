@@ -5,8 +5,19 @@
  */
 package test.java.remote.test1;
 
+import br.asha.dfss.hub.NodeHub;
+import br.asha.dfss.model.Node;
+import br.asha.dfss.model.SharedFile;
+import br.asha.dfss.repository.SharedFileList;
+import br.asha.dfss.repository.SubNetList;
+import org.apache.commons.io.IOUtils;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
 /**
- *
  * @author fir3destr0yer
  */
 public class Natan {
@@ -16,4 +27,29 @@ public class Natan {
     //DISPONIBILIZA ARQUIVO PARA COMPARTILHAMENTO
     //BUSCA ARQUIVOS DISPONÍVEIS
     //BAIXA ARQUIVO DE TIAGO
+
+    public Natan() throws IllegalAccessException, IOException, InstantiationException {
+        NodeHub mNode = new NodeHub(false, "Natan", "200.235.88.53", 1098);
+        mNode.setIpDoMaster("200.235.84.219");
+        SubNetList list = mNode.queroAListaDeSubRedesAtuais();
+        System.out.println(list);
+        for (Node node : list) {
+            if (node.nomeSubRede.equals("Tiago")) {
+                mNode.queroEntrarEmUmaSubRede(node);
+                return;
+            }
+        }
+        mNode.queroCompartilharUmArquivo(new File("b.txt"));
+        SharedFileList list2 = mNode.queroAListaDeArquivosCompartilhados();
+        System.out.println(list2);
+        for (SharedFile sf : list2) {
+            if (sf.nome.endsWith("a")) {
+                byte[] data = mNode.queroOArquivo(sf);
+                try (OutputStream os = new FileOutputStream(new File(sf.nome).getName())) {
+                    IOUtils.write(data, os);
+                }
+                break;
+            }
+        }
+    }
 }

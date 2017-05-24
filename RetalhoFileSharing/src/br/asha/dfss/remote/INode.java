@@ -1,5 +1,6 @@
 package br.asha.dfss.remote;
 
+import br.asha.dfss.model.Node;
 import br.asha.dfss.model.SharedFile;
 import br.asha.dfss.repository.Repository;
 import br.asha.dfss.repository.SharedFileList;
@@ -24,9 +25,12 @@ public interface INode extends Remote {
     byte[] alguemQuerUmArquivo(String nome)
             throws RemoteException;
 
+    Node alguemQuerSaberOSuperNoDaSubRede(String nomeDaRede)
+            throws RemoteException;
+
     /*
     @RemoteMethod
-    boolean requestNewNode(String name)
+    boolean requestNewNode(String nome)
             throws RemoteException;
 
     @RemoteMethod
@@ -42,7 +46,7 @@ public interface INode extends Remote {
             throws RemoteException;
 
     @RemoteMethod
-    boolean insertNewSuperNode(String name)
+    boolean insertNewSuperNode(String nome)
             throws RemoteException;
 
     @RemoteMethod
@@ -50,7 +54,7 @@ public interface INode extends Remote {
             throws RemoteException;
 
     @RemoteMethod
-    String sendSuperNodeFromSubNet(String name)
+    String sendSuperNodeFromSubNet(String nome)
             throws RemoteException;
 
     @RemoteMethod
@@ -70,11 +74,11 @@ public interface INode extends Remote {
             throws RemoteException;
 
     @RemoteMethod
-    byte[] sendDataFile(String name)
+    byte[] sendDataFile(String nome)
             throws RemoteException;
 
     @RemoteMethod
-    String findSuperNodeFromSubNet(String name)
+    String findSuperNodeFromSubNet(String nome)
             throws RemoteException;
             */
 }

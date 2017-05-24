@@ -32,7 +32,7 @@ public class MasterHub extends NodeHub implements IMaster, ILocalMaster {
     }
 
     private void init() {
-        SubNetList.getInstance(getNome()).add(getMeuIp(), getNome());
+        SubNetList.getInstance(getNome()).add(getMeuIp(), getNome(), getNome());
     }
 
     @RemoteMethod
@@ -44,7 +44,7 @@ public class MasterHub extends NodeHub implements IMaster, ILocalMaster {
         //IP do cara que quer criar uma rede.
         final String ipDoCliente = getIpDoCliente();
         //Adicione-o.
-        if (SubNetList.getInstance(getNome()).add(ipDoCliente, nome)) {
+        if (SubNetList.getInstance(getNome()).add(ipDoCliente, nome, nome)) {
             //Retorna a lista de IPs.
             return SubNetList.getInstance(getNome());
         } else {
@@ -63,19 +63,19 @@ public class MasterHub extends NodeHub implements IMaster, ILocalMaster {
 
     @Override
     @RemoteMethod
-    public boolean requestNewSuperNode(String name)
+    public boolean requestNewSuperNode(String nome)
             throws RemoteException {
         String clientIp = getIpDoCliente();
 
-        Utils.log("registerSuperNode: %s:%s", name, clientIp);
+        Utils.log("registerSuperNode: %s:%s", nome, clientIp);
 
         //Registrar uma nova sub-rede (IP e Nome).
-        if (getSuperNodeList().add(clientIp, name) &&
+        if (getSuperNodeList().add(clientIp, nome) &&
                 getSuperNodeList().save()) {
-            Utils.log("Sub-rede %s:%s registrada", name, clientIp);
+            Utils.log("Sub-rede %s:%s registrada", nome, clientIp);
             return true;
         } else {
-            Utils.log("Erro ao registrar a sub-rede %s:%s", name, clientIp);
+            Utils.log("Erro ao registrar a sub-rede %s:%s", nome, clientIp);
             return false;
         }
     }

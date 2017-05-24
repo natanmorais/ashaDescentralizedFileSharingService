@@ -22,6 +22,8 @@ public interface ILocalNode {
 
     byte[] queroOArquivo(SharedFile file);
 
+    Node quemEOSuperNoDaSubRede(String nomeDaSubRede);
+
     /*
     @LocalMethod
     boolean createNewSubNet(String masterIp, String subNetName);
@@ -59,7 +61,7 @@ public interface ILocalNode {
     List<SharedFile> getAvailableSharedFiles();
 
     @LocalMethod
-    boolean requestDataFile(String ip, String name);
+    boolean requestDataFile(String ip, String nome);
 
     @LocalMethod
     boolean requestNetStatus();

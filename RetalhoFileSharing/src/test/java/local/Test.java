@@ -24,9 +24,9 @@ public class Test {
         SubNetList listaDeSuperNos = mTiago.queroCriarUmaSubRede();
         Utils.log("%s", listaDeSuperNos);
         //Natan quer entrar em uma sub-rede.
-        Utils.log("Entrou na sub-rede: %b",
+        //Utils.log("Entrou na sub-rede: %b",
                 //Como Asha e Tiago tem o mesmo ip, vai entrar na Rede Asha pois usa a porta padrão
-                mNatan.queroEntrarEmUmaSubRede(listaDeSuperNos.getByName("Asha")));
+                //mNatan.queroEntrarEmUmaSubRede(listaDeSuperNos.getByName("Asha")));
         //Asha é que vai acabar recebendo..
         mNatan.queroCompartilharUmArquivo(new File("meuArquivosParaCompartilhar/oi.txt"));
         //Se a lista de Tiago estiver vazia, coloque na mão mesmo.

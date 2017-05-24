@@ -11,22 +11,25 @@ public class Node implements Serializable {
 
     @SerializedName("ip")
     public String ip;
-    @SerializedName("name")
-    public String name;
+    @SerializedName("nome")
+    public String nome;
+    @SerializedName("nomeSubRede")
+    public String nomeSubRede;
 
     public Node() {
     }
 
-    public Node(String ip, String name) {
+    public Node(String ip, String nome, String nomeSubRede) {
         this.ip = ip;
-        this.name = name;
+        this.nome = nome;
+        this.nomeSubRede = nomeSubRede;
     }
 
     @Override
     public String toString() {
         return "Node {" +
                 "ip='" + ip + '\'' +
-                ", name='" + name + '\'' +
+                ", nome='" + nome + '\'' +
                 '}';
     }
 
@@ -35,13 +38,18 @@ public class Node implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Node superNode = (Node) o;
+        Node node = (Node) o;
 
-        return name.equals(superNode.name);
+        return nome.equals(node.nome) &&
+                (nomeSubRede != null ?
+                        nomeSubRede.equals(node.nomeSubRede) :
+                        node.nomeSubRede == null);
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        int result = nome.hashCode();
+        result = 31 * result + (nomeSubRede != null ? nomeSubRede.hashCode() : 0);
+        return result;
     }
 }

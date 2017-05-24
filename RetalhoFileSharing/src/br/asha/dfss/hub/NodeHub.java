@@ -8,7 +8,6 @@ import br.asha.dfss.model.Node;
 import br.asha.dfss.model.SharedFile;
 import br.asha.dfss.remote.IMaster;
 import br.asha.dfss.remote.INode;
-import br.asha.dfss.repository.Repository;
 import br.asha.dfss.repository.SharedFileList;
 import br.asha.dfss.repository.SubNetList;
 import br.asha.dfss.repository.SubNetNodeList;
@@ -19,6 +18,7 @@ import org.apache.commons.io.IOUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.rmi.RemoteException;
+import java.util.List;
 
 public class NodeHub extends DfssHub implements INode, ILocalNode {
 
@@ -48,7 +48,9 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
     }
 
     private void init() {
-        SubNetNodeList.getInstance(getNome()).add(getMeuIp(), getNome());
+        if (euSouUmSuperNo) {
+            SubNetNodeList.getInstance(getNome()).add(getMeuIp(), getNome(), getNome());
+        }
         SharedFileList.getInstance(getNome()).carregar();
     }
 
@@ -165,7 +167,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
         //IP do cara que quer entrar em uma rede.
         final String ipDoCliente = getIpDoCliente();
         //Adiciona o cara.
-        return SubNetNodeList.getInstance(getNome()).add(new Node(ipDoCliente, nome));
+        return SubNetNodeList.getInstance(getNome()).add(new Node(ipDoCliente, nome, getNome()));
     }
 
     @LocalMethod
@@ -207,7 +209,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
         Utils.log("queroCompartilharUmArquivo(%s)", sharedFile);
 
         //Eu sou um nó.
-        if (meuSuperNo != null) {
+        if (!euSouUmSuperNo && meuSuperNo != null) {
             RmiClient<INode> superNo = criarUmCliente(meuSuperNo.ip);
             if (superNo != null) {
                 try {
@@ -218,7 +220,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
             }
         }
         //Eu sou um super-nó.
-        else if (ipDoMaster != null) {
+        else if (euSouUmSuperNo && ipDoMaster != null) {
             RmiClient<INode> master = criarUmCliente(ipDoMaster);
             if (master != null) {
                 try {
@@ -246,9 +248,9 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
             throws RemoteException {
         Utils.log("alguemQuerCompartilharUmArquivo(%s, %b)", file, reenviar);
 
-        //O mesmo arquivo (SHA e Nome batem) mas ips diferentes.
-        //O mesmo arquivo (Nomes batem) mas conteudo diferente.
-        //Arquivos diferentes mas ip iguais.
+        //O mesmo arquivo (SHA e Nome batem) mas ips diferentes. Varios computadores com o mesmo arquivo.
+        //O mesmo arquivo (Nomes batem) mas conteudo diferente. Duas versões de um mesmo arquivo na rede.
+        //Arquivos diferentes mas ip iguais. Computador com vários arq. pra compartilhar.
         if (SharedFileList.getInstance(getNome()).add(file)) {
             Utils.log("O arquivo foi adicionado");
             if (reenviar) {
@@ -283,7 +285,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
         Utils.log("queroAListaDeArquivosCompartilhados()");
 
         //Eu sou um nó.
-        if (meuSuperNo != null) {
+        if (!euSouUmSuperNo && meuSuperNo != null) {
             RmiClient<INode> superNo = criarUmCliente(meuSuperNo.ip);
             if (superNo != null) {
                 try {
@@ -294,7 +296,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
             }
         }
         //Eu sou um super-nó.
-        else if (ipDoMaster != null) {
+        else if (euSouUmSuperNo && ipDoMaster != null) {
             try {
                 return alguemQuerAListaDeArquivosCompartilhados();
             } catch (RemoteException e) {
@@ -322,7 +324,8 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
     }
 
     //Executa essa funcao para cada arquivo encontrado (com o mesmo nome) se houver um erro.
-    //
+    //O dado retornado será salvo atraves de um SaveDialog e posteriormente o usuario poderá compartilhá-lo.
+    //No programa haverá uma lista local com os arq. que podem ser compartilhados.
     @LocalMethod
     @Override
     public byte[] queroOArquivo(SharedFile file) {
@@ -345,6 +348,8 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
     @Override
     public byte[] alguemQuerUmArquivo(String nome)
             throws RemoteException {
+        Utils.log("alguemQuerUmArquivo(%s)", nome);
+
         File file = new File(nome);
         try (FileInputStream fis = new FileInputStream(file)) {
             return IOUtils.readFully(fis, (int) file.length());
@@ -354,22 +359,56 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
         }
     }
 
+    /**
+     * O Super-nó pode perguntar quem é o super-nó da rede dele após ser religado
+     * para tomar sua posição.
+     */
+    @LocalMethod
+    @Override
+    public Node quemEOSuperNoDaSubRede(String nomeDaSubRede) {
+        //Perguntar ao master quem é.
+        //Eu posso ser um super-nó que acabou de ser religado.
+        if (euSouUmSuperNo && ipDoMaster != null) {
+            RmiClient<INode> master = criarUmCliente(ipDoMaster);
+            if (master != null) {
+                try {
+                    return master.getRemoteObj().alguemQuerSaberOSuperNoDaSubRede(nomeDaSubRede);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    @RemoteMethod
+    @Override
+    public Node alguemQuerSaberOSuperNoDaSubRede(String nomeDaRede)
+            throws RemoteException {
+        List<Node> nos = SubNetList.getInstance(getNome()).getBySubNetName(nomeDaRede);
+        return nos.size() > 0 ? nos.get(0) : null;
+    }
+
     /*
     @Override
     @RemoteMethod
-    public boolean requestNewNode(String name)
+    public boolean requestNewNode(String nome)
             throws RemoteException {
         String clientIp = getIpDoCliente();
 
-        Utils.log("requestNewNode: %s:%s", name, clientIp);
+        Utils.log("requestNewNode: %s:%s", nome, clientIp);
 
         //Registrar uma nova máquina (IP e Nome).
-        if (getNodeList().add(clientIp, name) &&
+        if (getNodeList().add(clientIp, nome) &&
                 getNodeList().save()) {
-            Utils.log("Maquina %s:%s registrada", name, clientIp);
+            Utils.log("Maquina %s:%s registrada", nome, clientIp);
             return true;
         } else {
-            Utils.log("Erro ao registrar a maquina %s:%s", name, clientIp);
+            Utils.log("Erro ao registrar a maquina %s:%s", nome, clientIp);
             return false;
         }
     }
@@ -408,8 +447,8 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
     }
 
     @Override
-    public String sendSuperNodeFromSubNet(String name) {
-        SuperNode sn = getSuperNodeList().getByName(name);
+    public String sendSuperNodeFromSubNet(String nome) {
+        SuperNode sn = getSuperNodeList().getByName(nome);
         if (sn != null) return sn.getIp();
         return null;
     }
@@ -508,10 +547,10 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
 
     @RemoteMethod
     @Override
-    public boolean insertNewSuperNode(String name)
+    public boolean insertNewSuperNode(String nome)
             throws RemoteException {
         for (SuperNode sn : getSuperNodeList()) {
-            if (sn.getSubnetName().equalsIgnoreCase(name)) {
+            if (sn.getSubnetName().equalsIgnoreCase(nome)) {
                 sn.setIp(getIpDoCliente());
                 getSuperNodeList().save();
                 return true;
@@ -651,15 +690,15 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
 
     @Override
     @RemoteMethod
-    public String findSuperNodeFromSubNet(String name) {
+    public String findSuperNodeFromSubNet(String nome) {
         if (isSuperNode()) {
-            SuperNode sn = getSuperNodeList().getByName(name);
+            SuperNode sn = getSuperNodeList().getByName(nome);
             if (sn != null) return sn.getIp();
             return null;
         } else {
             try {
                 RmiClient<ISuperNode> superNodeClient = criarUmCliente(mSuperNode.getIp());
-                return superNodeClient.getRemoteObj().sendSuperNodeFromSubNet(name);
+                return superNodeClient.getRemoteObj().sendSuperNodeFromSubNet(nome);
             } catch (Exception e) {
                 return null;
             }
@@ -728,9 +767,9 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
 
     @Override
     @RemoteMethod
-    public byte[] sendDataFile(String name)
+    public byte[] sendDataFile(String nome)
             throws RemoteException {
-        File file = new File(name);
+        File file = new File(nome);
 
         if (file.exists()) {
             try (FileInputStream fis = new FileInputStream(file)) {
@@ -766,7 +805,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
 
     @Override
     @LocalMethod
-    public boolean requestDataFile(String ip, String name) {
+    public boolean requestDataFile(String ip, String nome) {
         RmiClient<ISuperNode> nodeClient = null;
 
         try {
@@ -776,10 +815,10 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
         }
 
         try {
-            byte[] data = nodeClient.getRemoteObj().sendDataFile(name);
-            try (OutputStream os = new FileOutputStream(name)) {
+            byte[] data = nodeClient.getRemoteObj().sendDataFile(nome);
+            try (OutputStream os = new FileOutputStream(nome)) {
                 os.write(data);
-                LogRepository.getInstance().add(new Log(ip, new Date().getTime(), name));
+                LogRepository.getInstance().add(new Log(ip, new Date().getTime(), nome));
                 return true;
             }
         } catch (Exception e) {
