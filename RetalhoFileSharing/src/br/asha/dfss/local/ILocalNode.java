@@ -26,6 +26,10 @@ public interface ILocalNode {
 
     void vouDesligar();
 
+    void religarSuperNo();
+
+    boolean religarComputador();
+
     /*
     @LocalMethod
     boolean createNewSubNet(String masterIp, String subNetName);

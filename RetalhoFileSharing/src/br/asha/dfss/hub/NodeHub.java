@@ -83,14 +83,13 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
             Utils.log("o Master aceitou a conexao");
             try {
                 //Pede ao master para registrar-se.
-                SubNetList listaDeSubRedes =
+                Object[] listas =
                         c.getRemoteObj().alguemQuerCriarUmaRede(getNome());
-                Utils.log("O Master retornou: %s", listaDeSubRedes);
-                //Substitui sua lista com a lista retornada do Master.
-                if (listaDeSubRedes != null) {
-                    SubNetList.getInstance(getNome()).replace(listaDeSubRedes);
-                    Utils.log("Substituí a lista de sub-redes");
-                    return listaDeSubRedes;
+                if (listas != null) {
+                    Utils.log("O Master retornou: as listas");
+                    //Substitui sua lista com a lista retornada do Master.
+                    SubNetList.getInstance(getNome()).replace((Repository<Node>) listas[0]);
+                    SharedFileList.getInstance(getNome()).replace((Repository<SharedFile>) listas[1]);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -208,10 +207,13 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
     @RemoteMethod
     @Override
     public boolean altereOSuperNoDeUmaSubRede(String nome) {
+        Utils.log("altereOSuperNoDeUmaSubRede(%s)", nome);
+
         for (Node no : SubNetList.getInstance(getNome())) {
             if (no.nomeSubRede.equals(nome)) {
                 no.ip = getIpDoCliente();
                 SubNetList.getInstance(getNome()).save();
+                Utils.log("O super-nó foi alterado");
                 return true;
             }
         }
@@ -266,9 +268,10 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
                 try {
                     return superNoCliente.getRemoteObj().alguemQuerCompartilharUmArquivo(sharedFile, true);
                 } catch (RemoteException e) {
-                    e.printStackTrace();
-                    iniciarUmaNovaEleicao();
+                    //e.printStackTrace();
                 }
+            } else {
+                iniciarUmaNovaEleicao();
             }
         }
         //Eu sou um super-nó.
@@ -343,9 +346,10 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
                 try {
                     return superNo.getRemoteObj().alguemQuerAListaDeArquivosCompartilhados();
                 } catch (RemoteException e) {
-                    e.printStackTrace();
-                    iniciarUmaNovaEleicao();
+                    //e.printStackTrace();
                 }
+            } else {
+                iniciarUmaNovaEleicao();
             }
         }
         //Eu sou um super-nó.
@@ -490,25 +494,12 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
         Utils.log("vouTransformarEmSuperNo()");
 
         if (listas != null && listas.length == 3) {
-            euSouUmSuperNo = true;
             SubNetList.getInstance(getNome()).replace((Repository<Node>) listas[0]);
             SharedFileList.getInstance(getNome()).replace((Repository<SharedFile>) listas[1]);
             SubNetNodeList.getInstance(getNome()).replace((Repository<Node>) listas[2]);
             //Estou avisando todos os super-nós
-            for (Node node : SubNetList.getInstance(getNome())) {
-                try {
-                    //Para outros super-nós.
-                    if (!node.ip.equals(getMeuIp())) {
-                        RmiClient<INode> no = criarUmCliente(node.ip);
-                        if (no != null) {
-                            no.getRemoteObj().altereOSuperNoDeUmaSubRede(getNome());
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            //TODO alterar o arquivo de super-nós colocando meu ip no lugar do antigo
+            avisarMeusVizinhos();
+            avisarOsSuperNos();
             return true;
         } else {
             return false;
@@ -516,6 +507,8 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
     }
 
     private void continuarUmaEleicao(long dataUltimaModificacao, long tamanho, long tempoDeInicio, int ganhador) {
+        Utils.log("continuarUmaEleicao( %d, %d, %d, %b)", dataUltimaModificacao, tamanho, tempoDeInicio, ganhador);
+
         int minhaPosicao = 0;
 
         //Pegar os computadores da lista de vizinhos
@@ -558,7 +551,9 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
         }
     }
 
-    private void chamarOProximoDaLista(long dataUltimaModificacao, long tamanho, long tempoDeInicio, int ganhador) {
+    private boolean chamarOProximoDaLista(long dataUltimaModificacao, long tamanho, long tempoDeInicio, int ganhador) {
+        Utils.log("chamarOProximoDaLista( %d, %d, %d, %b)", dataUltimaModificacao, tamanho, tempoDeInicio, ganhador);
+
         boolean tentativa = false;
 
         //Pegar os computadores da lista de vizinhos
@@ -571,7 +566,8 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
 
             //Tento comunicar com o próximo.
             if (tentativa &&
-                    !vizinhos.get(i).ip.equals(getMeuIp())) {
+                    !vizinhos.get(i).ip.equals(getMeuIp()) &&
+                    !vizinhos.get(i).ip.equals(meuSuperNo.ip)) {
                 RmiClient<INode> vizinhoCliente = criarUmCliente(vizinhos.get(i).ip);
                 if (vizinhoCliente != null) {
                     try {
@@ -580,33 +576,42 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
                                 dataUltimaModificacao,
                                 tamanho,
                                 tempoDeInicio,
-                                ganhador)) break;
+                                ganhador)) return true;
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
                 }
             }
         }
+
+        return false;
     }
 
     private void iniciarUmaNovaEleicao() {
+        Utils.log("iniciarUmaNovaEleicao");
+
         //Pegar os computadores da lista de vizinhos
         SubNetNodeList vizinhos = SubNetNodeList.getInstance(getNome());
         for (int i = 0; i < vizinhos.size(); i++) {
             //Pego eu na lista.
             if (vizinhos.get(i).ip.equals(getMeuIp())) {
-                chamarOProximoDaLista(SubNetNodeList.getInstance(getNome()).lastModified(),
+                if (!chamarOProximoDaLista(SubNetNodeList.getInstance(getNome()).lastModified(),
                         LogList.getInstance(getNome()).size(),
                         tempoDeInicio,
-                        i);
+                        i)) {
+                    existeUmaNovaEleicao(0, 0, 0, i);
+                }
                 return;
             }
         }
     }
 
     private void avisarMeusVizinhos() {
+        Utils.log("avisarMeusVizinhos");
+
         for (Node no : SubNetNodeList.getInstance(getNome())) {
-            if (!no.ip.equals(getMeuIp())) {
+            if (!no.ip.equals(getMeuIp()) &&
+                    SubNetNodeList.getInstance(getNome()).indexOf(no) != 0) {
                 RmiClient<INode> noCliente = criarUmCliente(no.ip);
                 try {
                     if (noCliente != null) {
@@ -620,11 +625,16 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
     }
 
     private void avisarOsSuperNos() {
+        Utils.log("avisarOsSuperNos");
+
         for (Node superNo : SubNetList.getInstance(getNome())) {
             RmiClient<INode> superNoCliente = criarUmCliente(superNo.ip);
             if (superNoCliente != null) {
                 try {
-                    superNoCliente.getRemoteObj().altereOSuperNoDeUmaSubRede(getNome());
+                    if (meuSuperNo != null)
+                        superNoCliente.getRemoteObj().altereOSuperNoDeUmaSubRede(meuSuperNo.nomeSubRede);
+                    else
+                        superNoCliente.getRemoteObj().altereOSuperNoDeUmaSubRede(getNome());
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
@@ -633,10 +643,18 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
 
         //Atualizar minha propria lista que eu sou o super-nó da minha rede.
         for (Node no : SubNetList.getInstance(getNome())) {
-            if (no.nomeSubRede.equals(getNome())) {
-                no.ip = getMeuIp();
-                SubNetList.getInstance(getNome()).save();
-                break;
+            if (meuSuperNo != null) {
+                if (no.nomeSubRede.equals(meuSuperNo.nomeSubRede)) {
+                    no.ip = getMeuIp();
+                    SubNetList.getInstance(getNome()).save();
+                    break;
+                }
+            } else {
+                if (no.nomeSubRede.equals(getNome())) {
+                    no.ip = getMeuIp();
+                    SubNetList.getInstance(getNome()).save();
+                    break;
+                }
             }
         }
     }
@@ -645,12 +663,16 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
     @RemoteMethod
     public void agoraSouSeuSuperNo(String ip)
             throws RemoteException {
+        Utils.log("agoraSouSeuSuperNo(%s)", ip);
+
         meuSuperNo.ip = ip;
     }
 
     @Override
     @RemoteMethod
     public boolean existeUmaNovaEleicao(long dataUltimaModificacao, long tamanho, long tempoDeInicio, int ganhador) {
+        Utils.log("existeUmaNovaEleicao");
+
         //Se o ganhador for eu mesmo.
         if (SubNetNodeList.getInstance(getNome()).get(ganhador).ip.equals(getMeuIp())) {
             //Comunicar com o super-nó para se tornar um super-nó.
@@ -739,6 +761,8 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
     @RemoteMethod
     public Object[] oSuperNoDeAlguemCaiu()
             throws RemoteException {
+        Utils.log("oSuperNoDeAlguemCaiu");
+
         return new Object[]{
                 SubNetList.getInstance(getNome()),
                 SharedFileList.getInstance(getNome())
@@ -752,7 +776,106 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
     @RemoteMethod
     public String mePassaSeuSuperNo()
             throws RemoteException {
+        Utils.log("mePassaSeuSuperNo");
+
         return meuSuperNo != null ? meuSuperNo.ip : null;
+    }
+
+    @LocalMethod
+    @Override
+    public void religarSuperNo() {
+        Utils.log("religarSuperNo");
+
+        for (Node superNo : SubNetList.getInstance(getNome())) {
+            Utils.log("%s", superNo);
+            RmiClient<INode> superNoCliente = criarUmCliente(superNo.ip);
+            if (superNoCliente != null) {
+                String ip;
+                try {
+                    ip = superNoCliente.getRemoteObj().qualOIpDaSubRede(getNome());
+                    Utils.log(ip);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                    return;
+                }
+
+                if (ip == null) {
+                    avisarOsSuperNos();
+                } else if (ip.equals(getMeuIp())) {
+                    return;
+                } else {
+                    Utils.log("Estou querendo tomar meu lugar de volta");
+                    superNoCliente = criarUmCliente(ip);
+                    if (superNoCliente != null) {
+                        Object[] listas;
+                        try {
+                            listas = superNoCliente.getRemoteObj().queroTomarSeuLugar();
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+
+                        if (listas != null) {
+                            SubNetList.getInstance(getNome()).replace((Repository<Node>) listas[0]);
+                            SharedFileList.getInstance(getNome()).replace((Repository<SharedFile>) listas[1]);
+                            SubNetNodeList.getInstance(getNome()).replace((Repository<Node>) listas[2]);
+                            avisarMeusVizinhos();
+                            avisarOsSuperNos();
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    @RemoteMethod
+    public String qualOIpDaSubRede(String nomeDaSubRede)
+            throws RemoteException {
+        Utils.log("qualOIpDaSubRede(%s)", nomeDaSubRede);
+
+        for (Node subRede : SubNetList.getInstance(getNome())) {
+            if (subRede.nomeSubRede.equals(nomeDaSubRede)) {
+                return subRede.ip;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    @RemoteMethod
+    public Object[] queroTomarSeuLugar()
+            throws RemoteException {
+        Utils.log("queroTomarSeuLugar");
+
+        return new Object[]{
+                SubNetList.getInstance(getNome()),
+                SharedFileList.getInstance(getNome()),
+                SubNetNodeList.getInstance(getNome())
+        };
+    }
+
+    @LocalMethod
+    @Override
+    public boolean religarComputador() {
+        Utils.log("religarComputador");
+
+        SubNetNodeList.getInstance(getNome()).carregar();
+        if (SubNetNodeList.getInstance(getNome()).exists()) {
+            if (euSouUmSuperNo) {
+                SubNetList.getInstance(getNome()).carregar();
+                SharedFileList.getInstance(getNome()).carregar();
+
+                try {
+                    return true;
+                } finally {
+                    religarSuperNo();
+                }
+            }
+        }
+
+        return false;
     }
 
     /*

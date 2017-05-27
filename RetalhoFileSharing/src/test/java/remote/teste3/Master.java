@@ -1,22 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package test.java.remote.test2;
+package test.java.remote.teste3;
 
 import br.asha.dfss.hub.MasterHub;
 
+import java.io.File;
 import java.rmi.RemoteException;
 
-/**
- * @author fir3destr0yer
- */
 public class Master {
-    private final MasterHub mHub;
+
+    private final MasterHub hub;
 
     public Master() throws IllegalAccessException, RemoteException, InstantiationException {
-        mHub = new MasterHub("Asha");
+        hub = new MasterHub("Asha");
+        hub.queroCompartilharUmArquivo(new File("1.txt"));
     }
 
     public static void main(String[] args) throws IllegalAccessException, RemoteException, InstantiationException {

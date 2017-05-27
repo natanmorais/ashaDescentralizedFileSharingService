@@ -3,16 +3,16 @@ package br.asha.dfss.utils;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.security.MessageDigest;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 public class Utils {
-    private static final String IPIFY_URL = "https://api.ipify.org?format=json";
+    private static final String IPIFY_URL = "http://ipinfo.io/ip";
 
     public static String ipify() {
         OkHttpClient client = new OkHttpClient();
@@ -24,15 +24,13 @@ public class Utils {
                 .url(IPIFY_URL)
                 .build();
 
-        int tentativas = 6;
-
-        while (tentativas-- > 0) {
-            try {
-                Response response = client.newCall(request).execute();
-                return new JSONObject(response.body().string()).getString("ip");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            Response response = client.newCall(request).execute();
+            String ip = response.body().string();
+            System.out.printf(ip);
+            return ip.trim();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return null;
