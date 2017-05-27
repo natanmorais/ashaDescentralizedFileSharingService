@@ -16,6 +16,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author fir3destr0yer
@@ -50,6 +52,18 @@ public class Natan {
                 }
                 break;
             }
+        }
+    }
+    
+    public static void main(String[] args ){
+        try {
+            new Natan();
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Natan.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Natan.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Natan.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
