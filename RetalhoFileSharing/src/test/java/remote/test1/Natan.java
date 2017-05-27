@@ -38,7 +38,7 @@ public class Natan {
         for (Node node : list) {
             if (node.nomeSubRede.equals("Tiago")) {
                 mNode.queroEntrarEmUmaSubRede(node);
-                return;
+                break;
             }
         }
         mNode.queroCompartilharUmArquivo(new File("b.txt"));

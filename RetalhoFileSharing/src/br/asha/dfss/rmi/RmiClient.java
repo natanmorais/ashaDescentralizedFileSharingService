@@ -27,9 +27,9 @@ public class RmiClient<T extends Remote> {
                 public Socket createSocket(String host, int port)
                         throws IOException {
                     Socket socket = new Socket();
-                    socket.setSoTimeout(1000);
+                    socket.setSoTimeout(10000);
                     socket.setSoLinger(false, 0);
-                    socket.connect(new InetSocketAddress(host, port), 1000);
+                    socket.connect(new InetSocketAddress(host, port), 10000);
                     return socket;
                 }
 

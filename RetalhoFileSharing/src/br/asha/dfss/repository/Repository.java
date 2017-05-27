@@ -12,16 +12,30 @@ import java.util.HashMap;
  */
 public abstract class Repository<T extends Serializable> extends ArrayList<T> implements Iterable<T> {
 
-    private transient static final Gson GSON = new Gson();
     protected static final HashMap<String, Repository<?>> INSTANCIAS = new HashMap<>();
+    private transient static final Gson GSON = new Gson();
+    private transient final File file;
     private transient String filename;
 
     public Repository(String filename) {
         this.filename = filename;
+        this.file = new File(filename);
     }
 
     public String getFilename() {
         return filename;
+    }
+
+    public boolean exists() {
+        return file.exists();
+    }
+
+    public long lastModified() {
+        return exists() ? 0 : file.lastModified();
+    }
+
+    public long sizeInBytes() {
+        return exists() ? file.length() : 0;
     }
 
     public void carregar() {

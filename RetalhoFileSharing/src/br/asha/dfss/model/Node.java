@@ -26,30 +26,31 @@ public class Node implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "Node {" +
-                "ip='" + ip + '\'' +
-                ", nome='" + nome + '\'' +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         Node node = (Node) o;
 
-        return nome.equals(node.nome) &&
-                (nomeSubRede != null ?
-                        nomeSubRede.equals(node.nomeSubRede) :
-                        node.nomeSubRede == null);
+        if (!ip.equals(node.ip)) return false;
+        if (!nome.equals(node.nome)) return false;
+        return nomeSubRede.equals(node.nomeSubRede);
     }
 
     @Override
     public int hashCode() {
-        int result = nome.hashCode();
-        result = 31 * result + (nomeSubRede != null ? nomeSubRede.hashCode() : 0);
+        int result = ip.hashCode();
+        result = 31 * result + nome.hashCode();
+        result = 31 * result + nomeSubRede.hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Node {" +
+                "ip='" + ip + '\'' +
+                ", nome='" + nome + '\'' +
+                ", nomeSubRede='" + nomeSubRede + '\'' +
+                '}';
     }
 }

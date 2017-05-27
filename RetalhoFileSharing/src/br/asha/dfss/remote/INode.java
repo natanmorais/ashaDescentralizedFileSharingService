@@ -2,22 +2,22 @@ package br.asha.dfss.remote;
 
 import br.asha.dfss.model.Node;
 import br.asha.dfss.model.SharedFile;
-import br.asha.dfss.repository.Repository;
 import br.asha.dfss.repository.SharedFileList;
+import br.asha.dfss.repository.SubNetNodeList;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public interface INode extends Remote {
 
-    boolean alguemQuerEntrarNaMinhaRede(String nome)
+    SubNetNodeList alguemQuerEntrarNaMinhaRede(String nome)
             throws RemoteException;
 
     boolean alguemQuerSaberSeEstouOnline()
             throws RemoteException;
 
     boolean alguemQuerCompartilharUmArquivo(SharedFile file, boolean reenviar)
-        throws RemoteException;
+            throws RemoteException;
 
     SharedFileList alguemQuerAListaDeArquivosCompartilhados()
             throws RemoteException;
@@ -28,6 +28,26 @@ public interface INode extends Remote {
     Node alguemQuerSaberOSuperNoDaSubRede(String nomeDaRede)
             throws RemoteException;
 
+    boolean altereOSuperNoDeUmaSubRede(String nome)
+            throws RemoteException;
+
+    boolean vouTransformarEmSuperNo(Object[] listas)
+            throws RemoteException;
+
+    void euTenhoUmNovoVizinho(Node node)
+            throws RemoteException;
+
+    boolean existeUmaNovaEleicao(long dataUltimaModificacao, long tamanho, long tempoDeInicio, int ganhador)
+            throws RemoteException;
+
+    Object[] oSuperNoDeAlguemCaiu()
+            throws RemoteException;
+
+    String mePassaSeuSuperNo()
+            throws RemoteException;
+
+    void agoraSouSeuSuperNo(String ip)
+            throws RemoteException;
     /*
     @RemoteMethod
     boolean requestNewNode(String nome)
