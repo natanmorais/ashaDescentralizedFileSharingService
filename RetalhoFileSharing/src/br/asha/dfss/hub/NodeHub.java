@@ -50,6 +50,10 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
         init();
     }
 
+    public boolean isEuSouUmSuperNo() {
+        return euSouUmSuperNo;
+    }
+
     private void init() {
         if (euSouUmSuperNo) {
             SubNetNodeList.getInstance(getNome()).add(getMeuIp(), getNome(), getNome());
@@ -862,17 +866,23 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
         Utils.log("religarComputador");
 
         SubNetNodeList.getInstance(getNome()).carregar();
-        if (SubNetNodeList.getInstance(getNome()).exists()) {
-            if (euSouUmSuperNo) {
+        
+        int existe = -1;
+        List<Node> no = SubNetNodeList.getInstance(getNome()).getByName(getNome());
+        for(Node n: no){
+            if(n.ip.equals(getMeuIp())){
+                existe = SubNetNodeList.getInstance(getNome()).indexOf(n);
+            }
+        }
+        
+        if (SubNetNodeList.getInstance(getNome()).exists() && existe >= 0) {
+            if (existe == 0) {
+                euSouUmSuperNo = true;
                 SubNetList.getInstance(getNome()).carregar();
                 SharedFileList.getInstance(getNome()).carregar();
-
-                try {
-                    return true;
-                } finally {
-                    religarSuperNo();
-                }
+                return true;
             }
+            return true;
         }
 
         return false;
