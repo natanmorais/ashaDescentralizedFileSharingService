@@ -16,99 +16,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Test.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/local/Test.java">
+      <file leaf-file-name="DfssHub.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/DfssHub.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MasterHub.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/hub/MasterHub.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="63" column="4" lean-forward="false" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="4" />
-              <folding>
-                <element signature="e#1042#1043#0" expanded="true" />
-                <element signature="e#1118#1119#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RmiServer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/rmi/RmiServer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="63" column="12" lean-forward="false" selection-start-line="63" selection-start-column="12" selection-end-line="63" selection-end-column="12" />
+            <state relative-caret-position="300">
+              <caret line="21" column="11" lean-forward="false" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RmiClient.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/rmi/RmiClient.java">
+      <file leaf-file-name="MasterHub.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/hub/MasterHub.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="52" column="7" lean-forward="false" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="7" />
-              <folding>
-                <element signature="e#1964#1965#0" expanded="true" />
-                <element signature="e#1993#1994#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="337">
+              <caret line="46" column="77" lean-forward="false" selection-start-line="46" selection-start-column="77" selection-end-line="46" selection-end-column="77" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NodeHub.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NodeHub.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/hub/NodeHub.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+            <state relative-caret-position="196">
+              <caret line="377" column="0" lean-forward="true" selection-start-line="377" selection-start-column="0" selection-end-line="377" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1495471185305" expanded="false" signature="7296:7307" ph=" { " />
-                <marker date="1495471185305" expanded="false" signature="7319:7325" ph=" }" />
-                <marker date="1495471185305" expanded="false" signature="11708:11719" ph=" { " />
-                <marker date="1495471185305" expanded="false" signature="11738:11744" ph=" }" />
-                <marker date="1495471185305" expanded="false" signature="20157:20168" ph=" { " />
-                <marker date="1495471185305" expanded="false" signature="20190:20196" ph=" }" />
-                <marker date="1495471185305" expanded="false" signature="21685:21696" ph=" { " />
-                <marker date="1495471185305" expanded="false" signature="21726:21732" ph=" }" />
-                <marker date="1495471185305" expanded="false" signature="21800:21811" ph=" { " />
-                <marker date="1495471185305" expanded="false" signature="21829:21835" ph=" }" />
-                <marker date="1495471185305" expanded="false" signature="22659:22670" ph=" { " />
-                <marker date="1495471185305" expanded="false" signature="22683:22689" ph=" }" />
-                <marker date="1495471185305" expanded="false" signature="22791:22802" ph=" { " />
-                <marker date="1495471185305" expanded="false" signature="22815:22821" ph=" }" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="INode.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/remote/INode.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="11" column="35" lean-forward="false" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ILocalNode.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/local/ILocalNode.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="14" column="44" lean-forward="false" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <marker date="1495893323461" expanded="false" signature="29168:29179" ph=" { " />
+                <marker date="1495893323461" expanded="false" signature="29191:29197" ph=" }" />
+                <marker date="1495893323461" expanded="false" signature="33580:33591" ph=" { " />
+                <marker date="1495893323461" expanded="false" signature="33610:33616" ph=" }" />
+                <marker date="1495893323461" expanded="false" signature="42029:42040" ph=" { " />
+                <marker date="1495893323461" expanded="false" signature="42062:42068" ph=" }" />
+                <marker date="1495893323461" expanded="false" signature="43557:43568" ph=" { " />
+                <marker date="1495893323461" expanded="false" signature="43598:43604" ph=" }" />
+                <marker date="1495893323461" expanded="false" signature="43672:43683" ph=" { " />
+                <marker date="1495893323461" expanded="false" signature="43701:43707" ph=" }" />
+                <marker date="1495893323461" expanded="false" signature="44531:44542" ph=" { " />
+                <marker date="1495893323461" expanded="false" signature="44555:44561" ph=" }" />
+                <marker date="1495893323461" expanded="false" signature="44663:44674" ph=" { " />
+                <marker date="1495893323461" expanded="false" signature="44687:44693" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -135,6 +83,27 @@
       <find>mLocalFileList</find>
       <find>sendDa</find>
       <find>queroCriarUmaSubRede</find>
+      <find>readFully</find>
+      <find>alguemQuerAListaDeArquivosCompartilhados</find>
+      <find>meuArquivosParaCompartilhar</find>
+      <find>getName</find>
+      <find>&quot;&quot;</find>
+      <find>insertNewSuperNode</find>
+      <find>coloque</find>
+      <find>transf</find>
+      <find>vouDesligar</find>
+      <find>alguemQuerEntrarNaMinhaRede</find>
+      <find>vizi</find>
+      <find>queroO</find>
+      <find>alguemQuerUmArquivo</find>
+      <find>vouTransformarEmSuperNo</find>
+      <find>altereOSuperNoDeUmaSubRede</find>
+      <find>RmiClient&lt;IN</find>
+      <find>criarUmCliente(meuSuperNo.ip)</find>
+      <find>estouO</find>
+      <find>queroSaberSeEstaOnline</find>
+      <find>alguemQuerCriarUmaRede</find>
+      <find>queroC</find>
     </findStrings>
     <replaceStrings>
       <replace>ISuperNode</replace>
@@ -151,13 +120,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/br/asha/dfss/provider/NodeProvider.java" />
-        <option value="$PROJECT_DIR$/src/br/asha/dfss/provider/SharedFilesProvider.java" />
-        <option value="$PROJECT_DIR$/src/br/asha/dfss/provider/ListProvider.java" />
-        <option value="$PROJECT_DIR$/src/br/asha/dfss/provider/SharedFileProvider.java" />
-        <option value="$PROJECT_DIR$/src/br/asha/dfss/FileRepository.java" />
         <option value="$PROJECT_DIR$/src/br/asha/dfss/model/LocalFile.java" />
-        <option value="$PROJECT_DIR$/src/br/asha/dfss/model/SharedFile.java" />
         <option value="$PROJECT_DIR$/src/br/asha/dfss/RemoteMethod.java" />
         <option value="$PROJECT_DIR$/src/br/asha/dfss/LocalMethod.java" />
         <option value="$PROJECT_DIR$/src/br/asha/dfss/local/IHub.java" />
@@ -185,23 +148,29 @@
         <option value="$PROJECT_DIR$/src/test/java/local/NovaSubRedeTest.java" />
         <option value="$PROJECT_DIR$/src/br/asha/dfss/repository/SuperNodeList.java" />
         <option value="$PROJECT_DIR$/src/br/asha/dfss/hub/SuperNodeHub.java" />
-        <option value="$PROJECT_DIR$/src/br/asha/dfss/remote/IMaster.java" />
-        <option value="$PROJECT_DIR$/src/br/asha/dfss/model/Node.java" />
         <option value="$PROJECT_DIR$/src/br/asha/dfss/repository/NodeList.java" />
         <option value="$PROJECT_DIR$/src/br/asha/dfss/repository/NosDaSubRedeList.java" />
         <option value="$PROJECT_DIR$/src/br/asha/dfss/repository/SuperNosList.java" />
         <option value="$PROJECT_DIR$/src/br/asha/dfss/repository/SuperNetList.java" />
-        <option value="$PROJECT_DIR$/src/br/asha/dfss/remote/INode.java" />
-        <option value="$PROJECT_DIR$/src/br/asha/dfss/local/ILocalNode.java" />
-        <option value="$PROJECT_DIR$/src/br/asha/dfss/repository/Repository.java" />
-        <option value="$PROJECT_DIR$/src/br/asha/dfss/repository/SubNetNodeList.java" />
-        <option value="$PROJECT_DIR$/src/br/asha/dfss/repository/SubNetList.java" />
-        <option value="$PROJECT_DIR$/src/br/asha/dfss/rmi/RmiClient.java" />
         <option value="$PROJECT_DIR$/src/br/asha/dfss/DfssHub.java" />
-        <option value="$PROJECT_DIR$/src/br/asha/dfss/hub/NodeHub.java" />
         <option value="$PROJECT_DIR$/src/br/asha/dfss/rmi/RmiServer.java" />
-        <option value="$PROJECT_DIR$/src/test/java/local/Test.java" />
+        <option value="$PROJECT_DIR$/src/br/asha/dfss/repository/SharedFileList.java" />
+        <option value="$PROJECT_DIR$/src/br/asha/dfss/model/SharedFile.java" />
+        <option value="$PROJECT_DIR$/src/br/asha/dfss/remote/IMaster.java" />
         <option value="$PROJECT_DIR$/src/br/asha/dfss/hub/MasterHub.java" />
+        <option value="$PROJECT_DIR$/src/br/asha/dfss/repository/SubNetList.java" />
+        <option value="$PROJECT_DIR$/src/br/asha/dfss/repository/SubNetNodeList.java" />
+        <option value="$PROJECT_DIR$/src/test/java/local/Test.java" />
+        <option value="$PROJECT_DIR$/src/br/asha/dfss/local/ILocalNode.java" />
+        <option value="$PROJECT_DIR$/src/test/java/remote/test1/Natan.java" />
+        <option value="$PROJECT_DIR$/src/test/java/remote/test1/Tiago.java" />
+        <option value="$PROJECT_DIR$/src/br/asha/dfss/rmi/RmiClient.java" />
+        <option value="$PROJECT_DIR$/src/br/asha/dfss/repository/Repository.java" />
+        <option value="$PROJECT_DIR$/src/br/asha/dfss/model/Log.java" />
+        <option value="$PROJECT_DIR$/src/br/asha/dfss/repository/LogList.java" />
+        <option value="$PROJECT_DIR$/src/br/asha/dfss/model/Node.java" />
+        <option value="$PROJECT_DIR$/src/br/asha/dfss/remote/INode.java" />
+        <option value="$PROJECT_DIR$/src/br/asha/dfss/hub/NodeHub.java" />
       </list>
     </option>
   </component>
@@ -227,8 +196,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -253,6 +222,62 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="remote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RetalhoFileSharing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RetalhoFileSharing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="remote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RetalhoFileSharing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RetalhoFileSharing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -438,14 +463,15 @@
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.18554688" />
-    <property name="project.structure.side.proportion" value="0.1789601" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/json-20160810.jar!/" />
+    <property name="project.structure.side.proportion" value="0.24381626" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lib" />
+      <recent name="$PROJECT_DIR$/src/br/asha/retalho/dfss" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="br.asha.dfss.repository" />
@@ -454,9 +480,8 @@
       <recent name="br.asha.dfss" />
       <recent name="br.asha.dfss.model" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lib" />
-      <recent name="$PROJECT_DIR$/src/br/asha/retalho/dfss" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -471,7 +496,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Test">
+  <component name="RunManager" selected="Application.Tiago">
     <configuration default="false" name="MasterTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="test.java.MasterTest" />
@@ -490,6 +515,21 @@
     <configuration default="false" name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="test.java.local.Test" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="RetalhoFileSharing" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="Tiago" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="test.java.remote.test1.Tiago" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -616,14 +656,16 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <list size="2">
+    <list size="3">
       <item index="0" class="java.lang.String" itemvalue="Application.MasterTest" />
       <item index="1" class="java.lang.String" itemvalue="Application.Test" />
+      <item index="2" class="java.lang.String" itemvalue="Application.Tiago" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Application.Test" />
-        <item index="1" class="java.lang.String" itemvalue="Application.MasterTest" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="Application.Tiago" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Test" />
+        <item index="2" class="java.lang.String" itemvalue="Application.MasterTest" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
@@ -663,16 +705,15 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32616487" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3249551" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928678" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34229392" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34111312" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2814871" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297491" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23823975" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39928058" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -690,6 +731,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297491" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -703,50 +745,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/br/asha/retalho/dfss/provider/NodeProvider.java" />
-    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/List.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="12" lean-forward="false" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/Collection.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-711">
-          <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/asha/retalho/dfss/DfssServer.java" />
-    <entry file="file://$PROJECT_DIR$/src/br/asha/retalho/dfss/helpers/FileHelper.java" />
-    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/model/MasterNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/FileRepository.java" />
-    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/repository/TransferFileProvider.java" />
     <entry file="jar://$PROJECT_DIR$/lib/commons-io-2.5.jar!/org/apache/commons/io/IOUtils.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
           <caret line="1010" column="25" lean-forward="false" selection-start-line="1010" selection-start-column="25" selection-end-line="1010" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/model/SharedFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="45" column="5" lean-forward="true" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/io/File.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="145" column="18" lean-forward="false" selection-start-line="145" selection-start-column="18" selection-end-line="145" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -797,62 +799,15 @@
     <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/remote/INode.java" />
     <entry file="file://$PROJECT_DIR$/src/test/java/NodeTest.java" />
     <entry file="file://$PROJECT_DIR$/src/test/java/SuperNodeTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/test/java/Filial2Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="24" column="47" lean-forward="false" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/Filial2ReligadoTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="18" column="57" lean-forward="false" selection-start-line="18" selection-start-column="57" selection-end-line="18" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/Filial1Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="18" column="47" lean-forward="false" selection-start-line="18" selection-start-column="47" selection-end-line="18" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/model/LocalFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="64" column="9" lean-forward="false" selection-start-line="48" selection-start-column="8" selection-end-line="64" selection-end-column="9" />
-          <folding>
-            <element signature="e#635#636#0" expanded="true" />
-            <element signature="e#692#693#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/Computador2Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="35" column="5" lean-forward="false" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/MasterTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="14" column="5" lean-forward="false" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/Filial2Test.java" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/Filial2ReligadoTest.java" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/Filial1Test.java" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/Computador2Test.java" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/MasterTest.java" />
     <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/IHub.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -860,7 +815,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="12" column="0" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="12" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -868,58 +825,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-660">
           <caret line="35" column="11" lean-forward="false" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
-          <folding>
-            <element signature="e#1066#1067#0" expanded="true" />
-            <element signature="e#1090#1091#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/repository/NodeRepository.java">
+    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/repository/NodeRepository.java" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/Computador1Test.java" />
+    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/repository/SharedFileRepository.java" />
+    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/repository/LogRepository.java" />
+    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/repository/LocalFileRepository.java" />
+    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/rmi/RmiServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="13" column="23" lean-forward="false" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/Computador1Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="17" column="32" lean-forward="false" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/repository/SharedFileRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="13" column="5" lean-forward="true" selection-start-line="10" selection-start-column="3" selection-end-line="13" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/repository/LogRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="19" column="56" lean-forward="false" selection-start-line="19" selection-start-column="56" selection-end-line="19" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/repository/LocalFileRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="13" column="5" lean-forward="false" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
-          <folding />
+        <state relative-caret-position="100">
+          <caret line="63" column="12" lean-forward="false" selection-start-line="63" selection-start-column="12" selection-end-line="63" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/utils/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="65" column="37" lean-forward="true" selection-start-line="65" selection-start-column="37" selection-end-line="65" selection-end-column="37" />
-          <folding />
+        <state relative-caret-position="172">
+          <caret line="40" column="25" lean-forward="false" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -927,24 +851,163 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="8" column="1" lean-forward="false" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/remote/IMaster.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="14" column="4" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+        <state relative-caret-position="120">
+          <caret line="12" column="14" lean-forward="false" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/repository/SubNetList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="50" column="5" lean-forward="true" selection-start-line="28" selection-start-column="4" selection-end-line="50" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/model/LocalFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/local/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="26" column="10" lean-forward="false" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/model/MasterNode.java" />
+    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/local/ILocalNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="26" column="23" lean-forward="false" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/rmi/RmiClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="28" column="18" lean-forward="false" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/remote/test1/Natan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="31" column="33" lean-forward="false" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/remote/test1/Tiago.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/repository/SharedFileList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="39" column="34" lean-forward="false" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/repository/SubNetNodeList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="10" column="40" lean-forward="false" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/io/File.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="35" column="18" lean-forward="false" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/repository/Repository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+          <folding>
+            <element signature="e#683#684#0" expanded="true" />
+            <element signature="e#714#715#0" expanded="true" />
+            <element signature="e#745#746#0" expanded="true" />
+            <element signature="e#781#782#0" expanded="true" />
+            <element signature="e#815#816#0" expanded="true" />
+            <element signature="e#872#873#0" expanded="true" />
+            <element signature="e#905#906#0" expanded="true" />
+            <element signature="e#956#957#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/model/SharedFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-361">
+          <caret line="29" column="17" lean-forward="false" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/model/Log.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="879">
+          <caret line="44" column="20" lean-forward="false" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/ArrayList.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="207" column="16" lean-forward="false" selection-start-line="207" selection-start-column="16" selection-end-line="207" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/repository/LogList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="39" column="1" lean-forward="false" selection-start-line="39" selection-start-column="1" selection-end-line="39" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/model/Node.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="26" column="16" lean-forward="false" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
+        <state relative-caret-position="359">
+          <caret line="45" column="5" lean-forward="true" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -953,125 +1016,58 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/remote/INode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="11" column="35" lean-forward="false" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+        <state relative-caret-position="459">
+          <caret line="50" column="6" lean-forward="false" selection-start-line="50" selection-start-column="6" selection-end-line="50" selection-end-column="6" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/local/ILocalNode.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/remote/test2/Master.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="14" column="44" lean-forward="false" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/repository/Repository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="20" />
-          <folding>
-            <element signature="docComment;class#Repository#0" expanded="false" />
-            <element signature="method#save#0;class#Repository#0" expanded="false" />
-            <element signature="method#add#0;class#Repository#0" expanded="false" />
-            <element signature="method#remove#0;class#Repository#0" expanded="false" />
-            <element signature="method#replace#0;class#Repository#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/repository/SubNetNodeList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="18" column="9" lean-forward="false" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/repository/SubNetList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
-          <caret line="33" column="5" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="33" selection-end-column="5" />
+        <state relative-caret-position="40">
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/DfssHub.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="25" column="31" lean-forward="true" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
-          <folding>
-            <element signature="e#1670#1671#0" expanded="true" />
-            <element signature="e#1710#1711#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/hub/NodeHub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1495471185305" expanded="false" signature="7296:7307" ph=" { " />
-            <marker date="1495471185305" expanded="false" signature="7319:7325" ph=" }" />
-            <marker date="1495471185305" expanded="false" signature="11708:11719" ph=" { " />
-            <marker date="1495471185305" expanded="false" signature="11738:11744" ph=" }" />
-            <marker date="1495471185305" expanded="false" signature="20157:20168" ph=" { " />
-            <marker date="1495471185305" expanded="false" signature="20190:20196" ph=" }" />
-            <marker date="1495471185305" expanded="false" signature="21685:21696" ph=" { " />
-            <marker date="1495471185305" expanded="false" signature="21726:21732" ph=" }" />
-            <marker date="1495471185305" expanded="false" signature="21800:21811" ph=" { " />
-            <marker date="1495471185305" expanded="false" signature="21829:21835" ph=" }" />
-            <marker date="1495471185305" expanded="false" signature="22659:22670" ph=" { " />
-            <marker date="1495471185305" expanded="false" signature="22683:22689" ph=" }" />
-            <marker date="1495471185305" expanded="false" signature="22791:22802" ph=" { " />
-            <marker date="1495471185305" expanded="false" signature="22815:22821" ph=" }" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/rmi/RmiServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="63" column="12" lean-forward="false" selection-start-line="63" selection-start-column="12" selection-end-line="63" selection-end-column="12" />
+        <state relative-caret-position="300">
+          <caret line="21" column="11" lean-forward="false" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/rmi/RmiClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="52" column="7" lean-forward="false" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="7" />
-          <folding>
-            <element signature="e#1964#1965#0" expanded="true" />
-            <element signature="e#1993#1994#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/local/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/hub/MasterHub.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="63" column="4" lean-forward="false" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="4" />
+        <state relative-caret-position="337">
+          <caret line="46" column="77" lean-forward="false" selection-start-line="46" selection-start-column="77" selection-end-line="46" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/asha/dfss/hub/NodeHub.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="377" column="0" lean-forward="true" selection-start-line="377" selection-start-column="0" selection-end-line="377" selection-end-column="0" />
           <folding>
-            <element signature="e#1042#1043#0" expanded="true" />
-            <element signature="e#1118#1119#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <marker date="1495893323461" expanded="false" signature="29168:29179" ph=" { " />
+            <marker date="1495893323461" expanded="false" signature="29191:29197" ph=" }" />
+            <marker date="1495893323461" expanded="false" signature="33580:33591" ph=" { " />
+            <marker date="1495893323461" expanded="false" signature="33610:33616" ph=" }" />
+            <marker date="1495893323461" expanded="false" signature="42029:42040" ph=" { " />
+            <marker date="1495893323461" expanded="false" signature="42062:42068" ph=" }" />
+            <marker date="1495893323461" expanded="false" signature="43557:43568" ph=" { " />
+            <marker date="1495893323461" expanded="false" signature="43598:43604" ph=" }" />
+            <marker date="1495893323461" expanded="false" signature="43672:43683" ph=" { " />
+            <marker date="1495893323461" expanded="false" signature="43701:43707" ph=" }" />
+            <marker date="1495893323461" expanded="false" signature="44531:44542" ph=" { " />
+            <marker date="1495893323461" expanded="false" signature="44555:44561" ph=" }" />
+            <marker date="1495893323461" expanded="false" signature="44663:44674" ph=" { " />
+            <marker date="1495893323461" expanded="false" signature="44687:44693" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -1083,15 +1079,16 @@
         <settings>
           <artifact-editor>
             <show-content>
-              <type id="artifact" />
               <type id="library" />
+              <type id="artifact" />
             </show-content>
           </artifact-editor>
-          <last-edited>comp1</last-edited>
+          <last-edited>Natan</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.1789601" />
+                <option value="0.24381626" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -1126,7 +1123,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.31713244" />
+                <option value="0.1789601" />
               </list>
             </option>
           </splitter-proportions>

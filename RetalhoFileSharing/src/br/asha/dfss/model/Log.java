@@ -1,12 +1,17 @@
 package br.asha.dfss.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Log implements Serializable {
 
-    private String ip;
-    private long date;
-    private String filename;
+    @SerializedName("ip")
+    public String ip;
+    @SerializedName("date")
+    public long date;
+    @SerializedName("filename")
+    public String filename;
 
     public Log(String ip, long date, String filename) {
         this.ip = ip;
@@ -14,27 +19,32 @@ public class Log implements Serializable {
         this.filename = filename;
     }
 
-    public String getIp() {
-        return ip;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Log log = (Log) o;
+
+        if (date != log.date) return false;
+        if (!ip.equals(log.ip)) return false;
+        return filename.equals(log.filename);
     }
 
-    public void setIp(String ip) {
-        this.ip = ip;
+    @Override
+    public int hashCode() {
+        int result = ip.hashCode();
+        result = 31 * result + (int) (date ^ (date >>> 32));
+        result = 31 * result + filename.hashCode();
+        return result;
     }
 
-    public long getDate() {
-        return date;
-    }
-
-    public void setDate(long date) {
-        this.date = date;
-    }
-
-    public String getFilename() {
-        return filename;
-    }
-
-    public void setFilename(String filename) {
-        this.filename = filename;
+    @Override
+    public String toString() {
+        return "Log {" +
+                "ip='" + ip + '\'' +
+                ", date=" + date +
+                ", filename='" + filename + '\'' +
+                '}';
     }
 }

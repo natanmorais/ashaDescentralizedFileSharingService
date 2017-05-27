@@ -24,6 +24,8 @@ public interface ILocalNode {
 
     Node quemEOSuperNoDaSubRede(String nomeDaSubRede);
 
+    void vouDesligar();
+
     /*
     @LocalMethod
     boolean createNewSubNet(String masterIp, String subNetName);
