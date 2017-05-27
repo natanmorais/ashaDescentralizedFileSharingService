@@ -2,10 +2,8 @@ package br.asha.dfss.hub;
 
 import br.asha.dfss.RemoteMethod;
 import br.asha.dfss.local.ILocalMaster;
-import br.asha.dfss.model.Node;
 import br.asha.dfss.remote.IMaster;
-import br.asha.dfss.repository.SubNetNodeList;
-import br.asha.dfss.repository.Repository;
+import br.asha.dfss.repository.SharedFileList;
 import br.asha.dfss.repository.SubNetList;
 import br.asha.dfss.utils.Utils;
 
@@ -37,7 +35,7 @@ public class MasterHub extends NodeHub implements IMaster, ILocalMaster {
 
     @RemoteMethod
     @Override
-    public SubNetList alguemQuerCriarUmaRede(String nome)
+    public Object[] alguemQuerCriarUmaRede(String nome)
             throws RemoteException {
         Utils.log("alguemQuerCriarUmaRede(%s)", nome);
 
@@ -46,7 +44,9 @@ public class MasterHub extends NodeHub implements IMaster, ILocalMaster {
         //Adicione-o.
         if (SubNetList.getInstance(getNome()).add(ipDoCliente, nome, nome)) {
             //Retorna a lista de IPs.
-            return SubNetList.getInstance(getNome());
+            return new Object[]{
+                    SubNetList.getInstance(getNome()),
+                    SharedFileList.getInstance(getNome())};
         } else {
             return null;
         }

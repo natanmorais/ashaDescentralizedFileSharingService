@@ -48,6 +48,12 @@ public interface INode extends Remote {
 
     void agoraSouSeuSuperNo(String ip)
             throws RemoteException;
+
+    String qualOIpDaSubRede(String nomeDaSubRede)
+            throws RemoteException;
+
+    Object[] queroTomarSeuLugar()
+            throws RemoteException;
     /*
     @RemoteMethod
     boolean requestNewNode(String nome)

@@ -5,11 +5,47 @@
  */
 package test.java.remote.test2;
 
+import br.asha.dfss.hub.NodeHub;
+import br.asha.dfss.model.Node;
+import br.asha.dfss.model.SharedFile;
+import org.apache.commons.io.IOUtils;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.rmi.RemoteException;
+
 /**
- *
  * @author fir3destr0yer
  */
 public class Computador2 {
-    //ENTRA NA SUB-REDE "FILIAL 2"
-    //REQUISITA ARQUIVO DO COMPUTADOR 1
+    private final NodeHub mHub;
+
+    public Computador2() throws IllegalAccessException, RemoteException, InstantiationException {
+        mHub = new NodeHub(false, "Computador 1");
+        //Entrar na rede da Filial 2.
+        for (Node subRede : mHub.queroAListaDeSubRedesAtuais()) {
+            if (subRede.nomeSubRede.equals("Filial 2")) {
+                mHub.queroEntrarEmUmaSubRede(subRede);
+                break;
+            }
+        }
+        //Pegar um Arquivo.
+        for (SharedFile sf : mHub.queroAListaDeArquivosCompartilhados()) {
+            if (sf.nome.endsWith("1.txt")) {
+                byte[] data = mHub.queroOArquivo(sf);
+                if (data != null) {
+                    try (FileOutputStream fos = new FileOutputStream(new File(sf.nome).getName())) {
+                        IOUtils.write(data, fos);
+                        return;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IllegalAccessException, RemoteException, InstantiationException {
+        new Computador2();
+    }
 }

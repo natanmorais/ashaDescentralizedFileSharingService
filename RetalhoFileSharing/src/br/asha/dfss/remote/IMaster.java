@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
 
 public interface IMaster extends INode, Remote {
 
-    SubNetList alguemQuerCriarUmaRede(String nome)
+    Object[] alguemQuerCriarUmaRede(String nome)
             throws RemoteException;
 
     SubNetList alguemQuerAListaDeSubRedes()
