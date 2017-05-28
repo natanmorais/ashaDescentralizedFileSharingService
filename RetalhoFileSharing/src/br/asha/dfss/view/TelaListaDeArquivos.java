@@ -5,17 +5,33 @@
  */
 package br.asha.dfss.view;
 
+import br.asha.dfss.hub.NodeHub;
+import br.asha.dfss.model.Node;
+import br.asha.dfss.model.SharedFile;
+import br.asha.dfss.repository.SharedFileList;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import org.apache.commons.io.IOUtils;
+
 /**
  *
  * @author fir3destr0yer
  */
 public class TelaListaDeArquivos extends javax.swing.JFrame {
 
+    private NodeHub hub;
     /**
      * Creates new form TelaListaDeArquivos
      */
-    public TelaListaDeArquivos() {
+    public TelaListaDeArquivos(NodeHub hub) {
         initComponents();
+        this.hub = hub;
+        mostraListaArquivos();
     }
 
     /**
@@ -38,16 +54,16 @@ public class TelaListaDeArquivos extends javax.swing.JFrame {
 
         jLabel1.setText("Retalho FileSharing");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(jList1);
 
         jLabel3.setText("Arquivo Selecionado:");
 
         jButton1.setText("Baixar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,6 +104,46 @@ public class TelaListaDeArquivos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void mostraListaArquivos() {
+        SharedFileList sfl = hub.queroAListaDeArquivosCompartilhados();
+        DefaultListModel list = new DefaultListModel();
+        for (int i = 0; i < sfl.size(); i++){
+            boolean repetido = false;
+            for(int j = 0; j < i; j++){
+                if(sfl.get(i).nome.equals(sfl.get(j).nome)){
+                    repetido = true;
+                }
+            }
+            if(!repetido){
+                list.addElement(sfl.get(i).nome);
+            }
+        }
+        jList1.setModel(list);
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(jTextField2.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Você precisa selecionar um "
+                    + "arquivo para ser baixado", "Erro de Verificação", 
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            for(SharedFile sf: hub.queroAListaDeArquivosCompartilhados()){
+                if(sf.nome.equals(jTextField2.getText())){
+                    byte[] data = hub.queroOArquivo(sf);
+                    if (data != null) {
+                        try (FileOutputStream fos = new FileOutputStream(new 
+                                File(sf.nome).getName())) {
+                            IOUtils.write(data, fos);
+                            break;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -118,7 +174,15 @@ public class TelaListaDeArquivos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaListaDeArquivos().setVisible(true);
+                try {
+                    new TelaListaDeArquivos(new NodeHub(false,"dcjb hvf")).setVisible(true);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(TelaListaDeArquivos.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (RemoteException ex) {
+                    Logger.getLogger(TelaListaDeArquivos.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(TelaListaDeArquivos.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

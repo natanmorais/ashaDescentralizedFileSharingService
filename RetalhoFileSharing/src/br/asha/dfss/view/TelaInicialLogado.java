@@ -6,6 +6,9 @@
 package br.asha.dfss.view;
 
 import br.asha.dfss.hub.NodeHub;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,6 +24,7 @@ public class TelaInicialLogado extends javax.swing.JFrame {
     public TelaInicialLogado(NodeHub hub) {
         this.hub = hub;
         initComponents();
+        this.setUndecorated(true);
     }
 
     /**
@@ -32,11 +36,14 @@ public class TelaInicialLogado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFileChooser1 = new javax.swing.JFileChooser();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+
+        jFileChooser1.setDialogTitle("Selecione um arquivo para compartilhar");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,6 +52,11 @@ public class TelaInicialLogado extends javax.swing.JFrame {
         jLabel2.setText("Bem vindo(a), o que deseja fazer:");
 
         jButton1.setText("Compartilhar Arquivo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Ver Lista de Arquivos Disponíveis");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -107,18 +119,38 @@ public class TelaInicialLogado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        new TelaListaDeArquivos(hub);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        if(hub.isEuSouUmSuperNo()){
+            hub.vouDesligar();
+        }
+        System.exit(0);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int opcao = jFileChooser1.showOpenDialog(this);
+        if(opcao == JFileChooser.APPROVE_OPTION){
+            File file = jFileChooser1.getSelectedFile();
+            if (hub.queroCompartilharUmArquivo(file.getAbsoluteFile())){
+                JOptionPane.showMessageDialog(null, "Este arquivo está agora "
+                        + "disponível para compartilhamento", "Sucesso!", 
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Algo errado aconteceu! \n"
+                        + "Não foi possível compartilhar este arquivo", 
+                        "ERRO!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

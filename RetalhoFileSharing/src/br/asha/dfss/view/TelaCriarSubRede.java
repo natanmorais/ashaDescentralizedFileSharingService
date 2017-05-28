@@ -5,6 +5,12 @@
  */
 package br.asha.dfss.view;
 
+import br.asha.dfss.hub.NodeHub;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author fir3destr0yer
@@ -96,8 +102,32 @@ public class TelaCriarSubRede extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private String takeIPfromID(String ID){
+        return ID;
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        if(jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preencha os campos disponíveis"
+                    + " para acessar o sistema!", "Erro de Criação", 
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            String ipMaster = takeIPfromID(jTextField1.getText());
+            try {
+                NodeHub hub = new NodeHub(true, jTextField2.getText());
+                hub.setIpDoMaster(ipMaster);
+                JOptionPane.showMessageDialog(null, "A sub-rede foi criada "
+                        + "corretamente! \nNome para Login: " + 
+                        jTextField2.getText(), "Sub-Rede criada!", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                new TelaInicialLogado(hub).setVisible(true);
+                this.setVisible(false);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Algum erro inesperado "
+                        + "ocorreu", "ERRO!", JOptionPane.ERROR_MESSAGE);
+            }
+            
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

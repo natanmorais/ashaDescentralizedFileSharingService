@@ -21,6 +21,9 @@ public class TelaInicial extends javax.swing.JFrame {
      */
     public TelaInicial() {
         initComponents();
+        jLabel2.setVisible(false);
+        jTextField1.setVisible(false);
+        jButton1.setVisible(false);
     }
 
     /**
@@ -53,8 +56,18 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel2.setText("Insira o nome do Computador :");
 
         jButton2.setText("Fazer Login");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Cadastrar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,8 +128,10 @@ public class TelaInicial extends javax.swing.JFrame {
                     if(hub.isEuSouUmSuperNo()){
                         hub.religarSuperNo();
                         new TelaInicialLogado(hub).setVisible(true);
+                        this.setVisible(false);
                     } else {
                         new TelaInicialLogado(hub).setVisible(true);
+                        this.setVisible(false);
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Algum erro ocorreu, "
@@ -133,6 +148,17 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jLabel2.setVisible(true);
+        jTextField1.setVisible(true);
+        jButton1.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        new TelaCadastro().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

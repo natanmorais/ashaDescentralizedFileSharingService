@@ -21,7 +21,7 @@ public class Tiago {
     //BAIXA ARQUIVO DE NATAN
 
     public Tiago() throws IllegalAccessException, IOException, InstantiationException, InterruptedException {
-        MasterHub mMaster = new MasterHub("Tiago", "200.235.84.219", 1098);
+        MasterHub mMaster = new MasterHub("Tiago", "138.118.135.240", 1098);
         mMaster.setIpDoMaster(null);
         mMaster.queroCompartilharUmArquivo(new File("/home/tiago/Área de Trabalho/a"));
         Thread.sleep(1000 * 30);

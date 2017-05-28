@@ -5,6 +5,12 @@
  */
 package br.asha.dfss.view;
 
+import br.asha.dfss.hub.MasterHub;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author fir3destr0yer
@@ -39,6 +45,11 @@ public class TelaCriarRede extends javax.swing.JFrame {
         jLabel2.setText("Insira o Nome da Nova Rede: ");
 
         jButton1.setText("Criar Rede");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,6 +86,33 @@ public class TelaCriarRede extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private String createID(String ip){
+        return ip;
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(jTextField1.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preencha o campo de nome da "
+                    + "Rede para acessar o sistema!", "Erro de Criação", 
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                MasterHub mHub = new MasterHub(jTextField1.getText());
+                String id = createID(mHub.getMeuIp());
+                JOptionPane.showMessageDialog(null, "A rede foi criada "
+                        + "corretamente! \nNome para Login: " + 
+                        jTextField1.getText() + "\nID único para uso: " + 
+                        id, "Rede criada!", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                new TelaInicialLogado(mHub).setVisible(true);
+                this.setVisible(false);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Algum erro inesperado "
+                        + "ocorreu", "ERRO!", JOptionPane.ERROR_MESSAGE);
+            } 
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
