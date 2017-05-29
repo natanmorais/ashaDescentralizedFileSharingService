@@ -47,10 +47,6 @@ public class Node implements Serializable {
 
     @Override
     public String toString() {
-        return "Node {" +
-                "ip='" + ip + '\'' +
-                ", nome='" + nome + '\'' +
-                ", nomeSubRede='" + nomeSubRede + '\'' +
-                '}';
+        return nome;
     }
 }

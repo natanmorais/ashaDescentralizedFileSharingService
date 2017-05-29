@@ -24,7 +24,7 @@ public class TelaInicialLogado extends javax.swing.JFrame {
     public TelaInicialLogado(NodeHub hub) {
         this.hub = hub;
         initComponents();
-        this.setUndecorated(true);
+        //this.setUndecorated(true);
     }
 
     /**

@@ -116,6 +116,7 @@ public class TelaCriarSubRede extends javax.swing.JFrame {
             try {
                 NodeHub hub = new NodeHub(true, jTextField2.getText());
                 hub.setIpDoMaster(ipMaster);
+                hub.queroCriarUmaSubRede();
                 JOptionPane.showMessageDialog(null, "A sub-rede foi criada "
                         + "corretamente! \nNome para Login: " + 
                         jTextField2.getText(), "Sub-Rede criada!", 
