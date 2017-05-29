@@ -23,9 +23,9 @@ public class CadastrarScreen extends BaseScreen implements ActionListener {
         mCriarFilialButton.addActionListener(this);
         mEntrarEmUmaFilialButton.addActionListener(this);
 
-        add(mCriarRedeButton, 100, 100);
-        add(mCriarFilialButton, 100, 160);
-        add(mEntrarEmUmaFilialButton, 100, 240);
+        add(mCriarRedeButton, 200, 100, 200, 50);
+        add(mCriarFilialButton, 200, 160, 200, 50);
+        add(mEntrarEmUmaFilialButton, 200, 220, 200, 50);
 
         exibir();
     }

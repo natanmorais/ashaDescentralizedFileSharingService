@@ -16,8 +16,8 @@ public class InicioScreen extends BaseScreen implements ActionListener {
         mCadastrarButton.addActionListener(this);
         mCadastrarButton.setPreferredSize(new Dimension(100, 50));
 
-        add(mLoginButton, 200, 300);
-        add(mCadastrarButton, 200, 360);
+        add(mLoginButton, 200, 300, 200, 50);
+        add(mCadastrarButton, 200, 360, 200, 50);
 
         exibir();
     }

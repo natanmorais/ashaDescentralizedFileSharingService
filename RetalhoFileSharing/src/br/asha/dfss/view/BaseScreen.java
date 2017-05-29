@@ -16,12 +16,20 @@ public class BaseScreen extends JFrame {
                 size.width, size.height);
         add(c);
     }
+    
+    public void add(Component c, int x, int y, int w, int h) {
+        Insets insets = getInsets();
+        Dimension size = new Dimension(w, h);
+        c.setBounds(x + insets.left, y + insets.top,
+                size.width, size.height);
+        add(c);
+    }
 
     public void exibir() {
         setSize(600, 500);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
-        setVisible(true);
+        setVisible(true);      
     }
 }
