@@ -28,7 +28,14 @@ public class InicioScreen extends BaseScreen implements ActionListener {
         exibir();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
+        for (UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("com.sun.java.swing.plaf.gtk.GTKLookAndFeel".equals(info.getClassName())) {
+                UIManager.setLookAndFeel(info.getClassName());
+                break;
+            }
+        }
+
         new InicioScreen();
     }
 

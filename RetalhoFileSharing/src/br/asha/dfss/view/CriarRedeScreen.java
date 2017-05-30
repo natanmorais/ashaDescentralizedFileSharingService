@@ -19,9 +19,9 @@ public class CriarRedeScreen extends BaseScreen implements ActionListener {
     public CriarRedeScreen() {
         mCriarButton.addActionListener(this);
         //Adiciona-os.
-        add(mIdInput, WIDTH / 2, 170, 400, 20);
-        add(mNomeInput, WIDTH / 2, 195, 400, 20);
-        add(mCriarButton, WIDTH / 2, 240, 400, 40);
+        add(mIdInput, WIDTH / 2, 180, 400, 40);
+        add(mNomeInput, WIDTH / 2, 220, 400, 40);
+        add(mCriarButton, WIDTH / 2, 260, 400, 40);
         //Show me!
         exibir();
     }

@@ -23,11 +23,11 @@ public class EntrarRedeScreen extends BaseScreen implements ActionListener {
         mEntrarButton.addActionListener(this);
         mPesquisarButton.addActionListener(this);
         //Adiciona-os.
-        add(mIdInput, WIDTH / 2, 70, 400, 20);
-        add(mNomeInput, WIDTH / 2, 95, 400, 20);
-        add(mPesquisarButton, WIDTH / 2, 135, 400, 40);
-        add(mEntrarButton, WIDTH / 2, 440, 400, 40);
-        add(mListaSuperNos, WIDTH / 2, 290, 400, 250);
+        add(mIdInput, WIDTH / 2, 70, 400, 40);
+        add(mNomeInput, WIDTH / 2, 108, 400, 40);
+        add(mPesquisarButton, WIDTH / 2, 148, 400, 40);
+        add(mListaSuperNos, WIDTH / 2, 300, 400, 250);
+        add(mEntrarButton, WIDTH / 2, 445, 400, 40);
         //Show me!
         exibir();
     }
@@ -37,7 +37,10 @@ public class EntrarRedeScreen extends BaseScreen implements ActionListener {
         final Object o = e.getSource();
         //Entrar em uma rede.
         if (o == mEntrarButton) {
-            if (mHub == null) return;
+            if (mHub == null) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos e selecione uma rede.");
+                return;
+            }
             //Pega a rede selecionada.
             Node node = mListaSuperNos.getSelectedValue();
             //Rede foi selecionada mesmo?

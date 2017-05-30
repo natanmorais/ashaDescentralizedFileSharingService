@@ -28,14 +28,14 @@ public class LogadoScreen extends BaseScreen implements ActionListener {
         mAtualizarButton.addActionListener(this);
 
         add(mAtualizarButton, WIDTH / 2 + 125, 50, 150, 50);
-        add(mListaArquivos, WIDTH / 2, 230, 400, 300);
+        add(mListaArquivos, WIDTH / 2, 240, 400, 320);
         add(mDownloadButton, WIDTH / 2 - 75, 430, 150, 50);
         add(mUploadButton, WIDTH / 2 + 75, 430, 150, 50);
 
         exibir();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
         new LogadoScreen(null);
     }
 
