@@ -44,6 +44,8 @@ public class Utils {
         byte[] buffer = new byte[8192];
         StringBuilder sb = new StringBuilder();
 
+        digest.update(file.getName().getBytes());
+
         while (n != -1) {
             n = fis.read(buffer);
             if (n > 0) {

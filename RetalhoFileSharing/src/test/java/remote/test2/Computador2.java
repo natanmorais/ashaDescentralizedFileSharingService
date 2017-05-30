@@ -12,6 +12,7 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 
 /**
@@ -20,7 +21,7 @@ import java.rmi.RemoteException;
 public class Computador2 {
     private final NodeHub mHub;
 
-    public Computador2() throws IllegalAccessException, RemoteException, InstantiationException {
+    public Computador2() throws IllegalAccessException, RemoteException, InstantiationException, MalformedURLException {
         mHub = new NodeHub(false, "Computador 1");
         //Entrar na rede da Filial 2.
         for (Node subRede : mHub.queroAListaDeSubRedesAtuais()) {
@@ -45,7 +46,7 @@ public class Computador2 {
         }
     }
 
-    public static void main(String[] args) throws IllegalAccessException, RemoteException, InstantiationException {
+    public static void main(String[] args) throws IllegalAccessException, RemoteException, InstantiationException, MalformedURLException {
         new Computador2();
     }
 }

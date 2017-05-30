@@ -1,7 +1,9 @@
 package br.asha.dfss.rmi;
 
+import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.RemoteServer;
@@ -53,24 +55,20 @@ public class RmiServer {
         this(remote, ip, PORT, name);
     }
 
-    public void start() {
-        try {
-            if (mRegistry == null) {
-                mRegistry = LocateRegistry.createRegistry(mPort);
-            }
-
-            mIsRunning = true;
-
-            RemoteServer.setLog(System.out);
-            //Cria um registro que aceita pedidos pela porta especificada.
-            //Caminho com o ip, porta e nome.
-            mUri = "rmi://" + mIp + ":" + mPort + "/" + mName;
-            System.out.println(mUri);
-            //Vincula o caminho com um objeto que será acessado remotamente.
-            Naming.rebind(mUri, mRemote);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void start() throws RemoteException, MalformedURLException {
+        if (mRegistry == null) {
+            mRegistry = LocateRegistry.createRegistry(mPort);
         }
+
+        mIsRunning = true;
+
+        RemoteServer.setLog(System.out);
+        //Cria um registro que aceita pedidos pela porta especificada.
+        //Caminho com o ip, porta e nome.
+        mUri = "rmi://" + mIp + ":" + mPort + "/" + mName;
+        System.out.println(mUri);
+        //Vincula o caminho com um objeto que será acessado remotamente.
+        Naming.rebind(mUri, mRemote);
     }
 
     public boolean isRunning() {

@@ -16,6 +16,7 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
     private String ipDoMaster;
 
     public NodeHub(boolean euSouUmSuperNo, String nome, String ip, int porta)
-            throws RemoteException, InstantiationException, IllegalAccessException {
+            throws RemoteException, InstantiationException, IllegalAccessException, MalformedURLException {
         super(nome, ip, porta);
         this.euSouUmSuperNo = euSouUmSuperNo;
         tempoDeInicio = System.currentTimeMillis();
@@ -35,7 +36,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
     }
 
     public NodeHub(boolean euSouUmSuperNo, String nome, int porta)
-            throws IllegalAccessException, RemoteException, InstantiationException {
+            throws IllegalAccessException, RemoteException, InstantiationException, MalformedURLException {
         super(nome, Utils.ipify(), porta);
         this.euSouUmSuperNo = euSouUmSuperNo;
         tempoDeInicio = System.currentTimeMillis();
@@ -43,7 +44,7 @@ public class NodeHub extends DfssHub implements INode, ILocalNode {
     }
 
     public NodeHub(boolean euSouUmSuperNo, String nome)
-            throws IllegalAccessException, RemoteException, InstantiationException {
+            throws IllegalAccessException, RemoteException, InstantiationException, MalformedURLException {
         super(nome, Utils.ipify());
         this.euSouUmSuperNo = euSouUmSuperNo;
         tempoDeInicio = System.currentTimeMillis();

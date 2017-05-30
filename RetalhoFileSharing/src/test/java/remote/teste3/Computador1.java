@@ -7,13 +7,14 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 
 public class Computador1 {
 
     private NodeHub hub;
 
-    public Computador1() throws IllegalAccessException, RemoteException, InstantiationException, InterruptedException {
+    public Computador1() throws IllegalAccessException, RemoteException, InstantiationException, InterruptedException, MalformedURLException {
         hub = new NodeHub(false, "Computador 1");
         hub.setIpDoMaster("200.235.87.125");
 
@@ -42,7 +43,7 @@ public class Computador1 {
         hub.queroAListaDeArquivosCompartilhados();
     }
 
-    public static void main(String[] args) throws IllegalAccessException, RemoteException, InstantiationException, InterruptedException {
+    public static void main(String[] args) throws IllegalAccessException, RemoteException, InstantiationException, InterruptedException, MalformedURLException {
         new Computador1();
     }
 }

@@ -3,6 +3,7 @@ package br.asha.dfss;
 import br.asha.dfss.rmi.RmiClient;
 import br.asha.dfss.rmi.RmiServer;
 
+import java.net.MalformedURLException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.ServerNotActiveException;
@@ -20,7 +21,7 @@ public abstract class DfssHub extends UnicastRemoteObject implements IHub {
      * Cria uma instância de um Hub.
      */
     public DfssHub(String nome, String ip, int porta)
-            throws RemoteException, InstantiationException, IllegalAccessException {
+            throws RemoteException, InstantiationException, IllegalAccessException, MalformedURLException {
         super();
         mNome = nome;
         mServidor = new RmiServer(this, ip, porta, "RETALHO");
@@ -31,7 +32,7 @@ public abstract class DfssHub extends UnicastRemoteObject implements IHub {
      * Cria uma instância de um Hub.
      */
     public DfssHub(String nome, String ip)
-            throws RemoteException, InstantiationException, IllegalAccessException {
+            throws RemoteException, InstantiationException, IllegalAccessException, MalformedURLException {
         super();
         mNome = nome;
         mServidor = new RmiServer(this, ip, "RETALHO");

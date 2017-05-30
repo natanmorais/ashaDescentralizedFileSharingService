@@ -7,6 +7,7 @@ package test.java.remote.test2;
 
 import br.asha.dfss.hub.NodeHub;
 
+import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 
 /**
@@ -15,7 +16,7 @@ import java.rmi.RemoteException;
 public class Filial2 {
     private final NodeHub mHub;
 
-    public Filial2() throws IllegalAccessException, RemoteException, InstantiationException, InterruptedException {
+    public Filial2() throws IllegalAccessException, RemoteException, InstantiationException, InterruptedException, MalformedURLException {
         mHub = new NodeHub(true, "Filial 2");
         //Criar a sub-rede
         mHub.queroCriarUmaSubRede();
@@ -25,7 +26,7 @@ public class Filial2 {
         System.exit(0);
     }
 
-    public static void main(String[] args) throws IllegalAccessException, RemoteException, InstantiationException, InterruptedException {
+    public static void main(String[] args) throws IllegalAccessException, RemoteException, InstantiationException, InterruptedException, MalformedURLException {
         new Filial2();
     }
 }

@@ -7,6 +7,7 @@ package test.java.remote.test2;
 
 import br.asha.dfss.hub.MasterHub;
 
+import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 
 /**
@@ -15,11 +16,11 @@ import java.rmi.RemoteException;
 public class Master {
     private final MasterHub mHub;
 
-    public Master() throws IllegalAccessException, RemoteException, InstantiationException {
+    public Master() throws IllegalAccessException, RemoteException, InstantiationException, MalformedURLException {
         mHub = new MasterHub("Asha");
     }
 
-    public static void main(String[] args) throws IllegalAccessException, RemoteException, InstantiationException {
+    public static void main(String[] args) throws IllegalAccessException, RemoteException, InstantiationException, MalformedURLException {
         new Master();
     }
 }

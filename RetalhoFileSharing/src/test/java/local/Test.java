@@ -7,11 +7,12 @@ import br.asha.dfss.repository.SubNetList;
 import br.asha.dfss.utils.Utils;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 
 public class Test {
 
-    public static void main(String[] args) throws IllegalAccessException, RemoteException, InstantiationException {
+    public static void main(String[] args) throws IllegalAccessException, RemoteException, InstantiationException, MalformedURLException {
         //Master.
         MasterHub mMaster = new MasterHub("Asha", "127.0.0.1", 1098);
         //Novo super-nó.

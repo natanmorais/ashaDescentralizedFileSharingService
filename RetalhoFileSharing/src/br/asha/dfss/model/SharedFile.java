@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.Date;
 
 public class SharedFile implements Serializable {
     @SerializedName("ip")
@@ -56,11 +57,6 @@ public class SharedFile implements Serializable {
 
     @Override
     public String toString() {
-        return "SharedFile {" +
-                "ip='" + ip + '\'' +
-                ", nome='" + nome + '\'' +
-                ", sha='" + sha + '\'' +
-                ", dataDaUltimaAtualicao=" + dataDaUltimaAtualicao +
-                '}';
+        return String.format("%s [%s]", nome, new Date(dataDaUltimaAtualicao));
     }
 }

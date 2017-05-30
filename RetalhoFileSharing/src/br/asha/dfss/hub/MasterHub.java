@@ -7,24 +7,25 @@ import br.asha.dfss.repository.SharedFileList;
 import br.asha.dfss.repository.SubNetList;
 import br.asha.dfss.utils.Utils;
 
+import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 
 public class MasterHub extends NodeHub implements IMaster, ILocalMaster {
 
     public MasterHub(String nome, String ip, int porta)
-            throws RemoteException, InstantiationException, IllegalAccessException {
+            throws RemoteException, InstantiationException, IllegalAccessException, MalformedURLException {
         super(true, nome, ip, porta);
         init();
     }
 
     public MasterHub(String nome, int porta)
-            throws IllegalAccessException, RemoteException, InstantiationException {
+            throws IllegalAccessException, RemoteException, InstantiationException, MalformedURLException {
         super(true, nome, Utils.ipify(), porta);
         init();
     }
 
     public MasterHub(String nome)
-            throws IllegalAccessException, RemoteException, InstantiationException {
+            throws IllegalAccessException, RemoteException, InstantiationException, MalformedURLException {
         super(true, nome);
         init();
     }

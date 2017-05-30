@@ -9,6 +9,7 @@ import br.asha.dfss.hub.NodeHub;
 import br.asha.dfss.model.Node;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 
 /**
@@ -17,7 +18,7 @@ import java.rmi.RemoteException;
 public class Computador1 {
     private final NodeHub mHub;
 
-    public Computador1() throws IllegalAccessException, RemoteException, InstantiationException {
+    public Computador1() throws IllegalAccessException, RemoteException, InstantiationException, MalformedURLException {
         mHub = new NodeHub(false, "Computador 1");
         //Entrar na rede da Filial 1.
         for (Node subRede : mHub.queroAListaDeSubRedesAtuais()) {
@@ -30,7 +31,7 @@ public class Computador1 {
         mHub.queroCompartilharUmArquivo(new File("1.txt"));
     }
 
-    public static void main(String[] args) throws IllegalAccessException, RemoteException, InstantiationException {
+    public static void main(String[] args) throws IllegalAccessException, RemoteException, InstantiationException, MalformedURLException {
         new Computador1();
     }
 }
