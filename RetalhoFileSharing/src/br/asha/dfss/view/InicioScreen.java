@@ -16,6 +16,7 @@ public class InicioScreen extends BaseScreen implements ActionListener {
     private JButton mUsuarioButton = new JButton("USUÁRIO");
 
     public InicioScreen() {
+        super("Home");
         //Botoes da tela inicial.
         mMatrizButton.addActionListener(this);
         mFilialButton.addActionListener(this);
@@ -65,6 +66,12 @@ public class InicioScreen extends BaseScreen implements ActionListener {
             return;
         }
 
-        dispose();
+        super.dispose();
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        System.exit(0);
     }
 }

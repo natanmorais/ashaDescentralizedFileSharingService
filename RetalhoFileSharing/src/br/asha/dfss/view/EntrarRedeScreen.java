@@ -2,10 +2,13 @@ package br.asha.dfss.view;
 
 import br.asha.dfss.hub.NodeHub;
 import br.asha.dfss.model.Node;
+import br.asha.dfss.model.SharedFile;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.HashSet;
 
 /**
  * Tela de entrar em uma rede (Usuário).
@@ -20,6 +23,7 @@ public class EntrarRedeScreen extends BaseScreen implements ActionListener {
     private NodeHub mHub;
 
     public EntrarRedeScreen() {
+        super("Entrar em uma rede");
         mEntrarButton.addActionListener(this);
         mPesquisarButton.addActionListener(this);
         //Adiciona-os.
@@ -68,6 +72,12 @@ public class EntrarRedeScreen extends BaseScreen implements ActionListener {
             try {
                 mHub = new NodeHub(false, mNomeInput.getText());
                 mHub.setIpDoMaster(mIdInput.getText());
+                DefaultListModel<Node> model = new DefaultListModel<>();
+                //Exibe apenas os nomes dos arquivos
+                for (Node node : mHub.queroAListaDeSubRedesAtuais()) {
+                    model.addElement(node);
+                }
+                mListaSuperNos.setModel(model);
                 return;
             } catch (Exception ex) {
                 ex.printStackTrace();

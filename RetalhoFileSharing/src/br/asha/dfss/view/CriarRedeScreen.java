@@ -17,6 +17,7 @@ public class CriarRedeScreen extends BaseScreen implements ActionListener {
     private NodeHub mHub;
 
     public CriarRedeScreen() {
+        super("Criar uma rede");
         mCriarButton.addActionListener(this);
         //Adiciona-os.
         add(mIdInput, WIDTH / 2, 180, 400, 40);

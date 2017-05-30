@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.File;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SharedFile implements Serializable {
@@ -57,6 +58,9 @@ public class SharedFile implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("%s [%s]", nome, new Date(dataDaUltimaAtualicao));
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY HH:mm:SS");
+        return String.format("%s [%s]",
+                new File(nome).getName(),
+                format.format(new Date(dataDaUltimaAtualicao)));
     }
 }

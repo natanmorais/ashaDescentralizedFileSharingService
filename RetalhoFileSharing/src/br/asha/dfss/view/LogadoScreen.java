@@ -21,6 +21,7 @@ public class LogadoScreen extends BaseScreen implements ActionListener {
     private NodeHub mHub;
 
     public LogadoScreen(NodeHub hub) {
+        super(hub.getNome());
         mHub = hub;
 
         mDownloadButton.addActionListener(this);
@@ -33,10 +34,6 @@ public class LogadoScreen extends BaseScreen implements ActionListener {
         add(mUploadButton, WIDTH / 2 + 75, 430, 150, 50);
 
         exibir();
-    }
-
-    public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
-        new LogadoScreen(null);
     }
 
     @Override
@@ -113,7 +110,7 @@ public class LogadoScreen extends BaseScreen implements ActionListener {
             //Exibe apenas os nomes dos arquivos
             for (SharedFile file : mHub.queroAListaDeArquivosCompartilhados()) {
                 final String name = new File(file.nome).getName();
-                if (files.contains(name)) {
+                if (!files.contains(name)) {
                     files.add(name);
                     model.addElement(file);
                 }

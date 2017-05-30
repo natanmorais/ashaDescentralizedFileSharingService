@@ -8,7 +8,8 @@ public class BaseScreen extends JFrame {
     public static final int WIDTH = 600;
     public static final int HEIGHT = 500;
 
-    public BaseScreen() {
+    public BaseScreen(String title) {
+        super(title);
         setLayout(null);
     }
 
