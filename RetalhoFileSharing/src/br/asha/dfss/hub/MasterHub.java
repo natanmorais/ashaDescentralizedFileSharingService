@@ -59,35 +59,4 @@ public class MasterHub extends NodeHub implements IMaster, ILocalMaster {
             throws RemoteException {
         return SubNetList.getInstance(getNome());
     }
-
-    /*
-
-    @Override
-    @RemoteMethod
-    public boolean requestNewSuperNode(String nome)
-            throws RemoteException {
-        String clientIp = getIpDoCliente();
-
-        Utils.log("registerSuperNode: %s:%s", nome, clientIp);
-
-        //Registrar uma nova sub-rede (IP e Nome).
-        if (getSuperNodeList().add(clientIp, nome) &&
-                getSuperNodeList().save()) {
-            Utils.log("Sub-rede %s:%s registrada", nome, clientIp);
-            return true;
-        } else {
-            Utils.log("Erro ao registrar a sub-rede %s:%s", nome, clientIp);
-            return false;
-        }
-    }
-
-    @Override
-    @RemoteMethod
-    public List<SuperNode> requestAvailableSuperNodes()
-            throws RemoteException {
-        Utils.log("getAvailableSuperNodes");
-        return getSuperNodeList().toList();
-    }
-
-    */
 }
